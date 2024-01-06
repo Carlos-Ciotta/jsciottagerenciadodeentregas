@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabela com Checkbox</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            width: 100%;
+        }
+
+        .metade {
+            width: 50%;
+            float: left;
+        }
+
+        .checkbox-container {
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+        #datePicker {
+            margin-bottom: 10px;
+            width: 11%;
+            padding: 8px;
+        }
+
+        .radio-group {
+            margin-bottom: 10px;
+        }
+
+        .radio-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-family: 'ITC Avant Garde Gothic Pro', sans-serif;
+        }
+
+        #radOpcao1, #radOpcao2 {
+            margin-right: 5px;
+        }
+
+        #btnEnviarEntrega {
+            padding: 10px;
+            margin-top: 10px;
+            background-color: #e381209d;
+            color: #323232;
+            border: none;
+            cursor: pointer;
+        }
+        #btnAlterarEntrega {
+            padding: 10px;
+            margin-top: 10px;
+            background-color: #e381209d;
+            color: #323232;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <label for="radio">Veículo</label>
+        <div class="radio-group" id="radio">
+            <label>
+                <input type="radio" id="radOpcao1" name="opcaoRadio1"> Volkswagen - Grande
+            </label>
+            <label>
+                <input type="radio" id="radOpcao2" name="opcaoRadio2"> Ford - Pequeno
+            </label>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Rua</th>
+                <th>Bairro</th>
+                <th>Hora Entrega</th>
+                <th>Data Entrega</th>
+                <th>Observação</th>
+                <th>Enviar</th>
+            </tr>
+        </thead>
+        <tbody id="tabela-corpo">
+            <!-- O conteúdo da tabela será preenchido dinamicamente pela função JavaScript -->
+        </tbody>
+    </table>
+</div>
+<button id="btnEnviarEntrega" onclick="updateSituacao()">Enviar Entrega</button>
+<div class="metade">
+    <h2>Ford</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Descrição</th>
+                <th>Atrasar</th>
+                <th>Remover</th>
+                <th>Encerrar</th>
+            </tr>
+        </thead>
+        <tbody id="tabela1-corpo">
+            <!-- O conteúdo da tabela será preenchido dinamicamente pela função JavaScript -->
+        </tbody>
+    </table>
+    <button id="btnAlterarEntrega" onclick="updateSituacao()">Alterar Entrega</button>
+</div>
+
+<div class="metade">
+    <h2>Volkswagen</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Descrição</th>
+                <th>Atrasar</th>
+                <th>Remover</th>
+                <th>Encerrar</th>
+            </tr>
+        </thead>
+        <tbody id="tabela2-corpo">
+            <!-- O conteúdo da tabela será preenchido dinamicamente pela função JavaScript -->
+        </tbody>
+    </table>
+    <button id="btnAlterarEntrega" onclick="updateSituacao()">Alterar Entrega</button>
+</div>
+
+<script>
+    function obterLista() {
+        // Substitua este exemplo com sua própria lógica para obter a lista de dados
+        return [
+            { id: 1, nome: 'Nome1', rua: 'Rua1', bairro: 'Bairro1', hora_entrega: '10:00', data_entrega: '2024-01-06', observacao: 'Observacao1' },
+            { id: 2, nome: 'Nome2', rua: 'Rua2', bairro: 'Bairro2', hora_entrega: '12:00', data_entrega: '2024-01-07', observacao: 'Observacao2' },
+            // Adicione mais itens conforme necessário
+        ];
+    }
+
+    // Preencher a tabela principal com a lista de dados
+    function preencherTabela() {
+        var tabelaCorpo = document.getElementById('tabela-corpo');
+        var lista = obterLista();
+
+        lista.forEach(function(item) {
+            var linha = document.createElement('tr');
+
+            // Adicionar as células da linha
+            for (var chave in item) {
+                var celula = document.createElement('td');
+                celula.textContent = item[chave];
+                linha.appendChild(celula);
+            }
+
+            // Adicionar checkbox à última célula da linha
+            var checkboxCelula = document.createElement('td');
+            var checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.value = item.id;
+            checkboxCelula.appendChild(checkbox);
+            linha.appendChild(checkboxCelula);
+
+            // Adicionar a linha à tabela
+            tabelaCorpo.appendChild(linha);
+        });
+    }
+
+    // Preencher as tabelas 1 e 2 com dados
+    function preencherTabelasSecundarias() {
+        var tabela1Corpo = document.getElementById('tabela1-corpo');
+        var tabela2Corpo = document.getElementById('tabela2-corpo');
+
+        // Substitua com sua própria lógica para obter dados para as tabelas secundárias
+        var dadosTabela1 = [
+            { id: 101, descricao: 'Descrição1' },
+            { id: 102, descricao: 'Descrição2' },
+        ];
+
+        var dadosTabela2 = [
+            { id: 201, descricao: 'Descrição3' },
+            { id: 202, descricao: 'Descrição4' },
+        ];
+
+        preencherTabelaSecundaria(tabela1Corpo, dadosTabela1);
+        preencherTabelaSecundaria(tabela2Corpo, dadosTabela2);
+    }
+
+    // Função para preencher tabelas secundárias
+    function preencherTabelaSecundaria(tabelaCorpo, dados) {
+        dados.forEach(function(item) {
+            var linha = document.createElement('tr');
+
+            // Adicionar as células da linha
+            for (var chave in item) {
+                var celula = document.createElement('td');
+                celula.textContent = item[chave];
+                linha.appendChild(celula);
+            }
+
+            // Adicionar checkbox à última célula da linha
+            for (var i = 0; i < 3; i++) {
+                var checkboxCelula = document.createElement('td');
+                var checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.value = item.id;
+                checkbox.className = 'checkbox' + (i + 1);
+                checkboxCelula.appendChild(checkbox);
+                linha.appendChild(checkboxCelula);
+            }
+
+            // Adicionar a linha à tabela
+            tabelaCorpo.appendChild(linha);
+        });
+    }
+
+    preencherTabela();
+    preencherTabelasSecundarias();
+
+    function updateSituacao() {
+            alert('Entrega Enviada');
+            resetCampos();
+            preencherTabela();
+        }
+
+    function resetCampos() {
+            document.getElementById("radOpcao1").checked = false;
+            document.getElementById("radOpcao2").checked = false;
+        }
+</script>
+
+</body>
+</html>
