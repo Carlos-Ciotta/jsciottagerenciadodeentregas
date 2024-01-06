@@ -1,4 +1,4 @@
-const Entrega = require('./models/entregas');
+const Entrega = require('../models/entregas');
 
 const getAllEntregas = async(req,res, next)=>{
     try{

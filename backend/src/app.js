@@ -9,8 +9,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/', veiculosRoutes);
 app.use('/', entregasRoutes); 
 
+const HOST = '127.0.0.1';
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, () => {
-  console.log(`Servidor rodando na porta ${PORT}`);
+app.listen(PORT,HOST, () => {
+  console.log(`Servidor rodando na porta http://${HOST}:${PORT}`);
 });

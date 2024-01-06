@@ -1,0 +1,53 @@
+body {
+    font-family: 'Lemon Milk', sans-serif;
+}
+
+.container_inteiro {
+    width: 100%;
+}
+
+.container_metade {
+    width: 50%;
+    float: left;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+#datePicker {
+    margin-bottom: 10px;
+    width: 11%;
+    padding: 8px;
+}
+
+.radio-group {
+    margin-bottom: 10px;
+}
+
+.radio-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-family: 'ITC Avant Garde Gothic Pro', sans-serif;
+}
+
+#radOpcao1, #radOpcao2 {
+    margin-right: 5px;
+}
+
+.button{
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #e381209d;
+    color: #323232;
+    border: none;
+    cursor: pointer;
+}
