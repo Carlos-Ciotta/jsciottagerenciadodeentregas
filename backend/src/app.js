@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
-const veiculosRoutes = require('./routes/veiculos');
-const entregasRoutes = require('./routes/entregas');
+const veiculosRoutes = require('../src/routes/veiculos');
+const entregasRoutes = require('../src/routes/entregasnpm');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -13,5 +13,4 @@ const HOST = '127.0.0.1';
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT,HOST, () => {
-  console.log(`Servidor rodando na porta http://${HOST}:${PORT}`);
-});
+console.log(`Servidor rodando na porta http://${HOST}:${PORT}`);});
