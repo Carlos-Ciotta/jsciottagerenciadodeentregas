@@ -2,7 +2,7 @@ const Entrega = require('../models/entregas');
 
 const getAllEntregas = async(req,res, next)=>{
     try{
-        const entregas = await Cliente.findAll();
+        const entregas = await Entrega.findAll();
         if (entregas){
             res.status(200).json({
                 'status': 'Sucesso',

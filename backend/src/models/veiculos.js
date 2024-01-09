@@ -37,3 +37,5 @@ const Veiculo = sequelize.define('Veiculo', {
     },
   },
 });
+
+module.exports = Veiculo;
