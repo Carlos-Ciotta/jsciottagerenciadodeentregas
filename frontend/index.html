@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ciotta- Gerênciamento de Entregas</title>
+    <script src="main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <style>
         body {
             margin: 0;
@@ -101,17 +103,17 @@
 
 <div class="container">
     <div class="divisao1">
-        <label for="newInput1" class="new-label">Número do Pedido:</label>
-        <input type="text" id="newInput1" class="new-input">
+        <label for="id_input" class="new-label" id="labelcomum">Número do Pedido:</label>
+        <input type="text" id="id_input" class="new-input">
 
-        <label for="newInput1" class="new-label">Nome do Cliente:</label>
-        <input type="text" id="newInput1" class="new-input">
+        <label for="nome_input" class="new-label">Nome do Cliente:</label>
+        <input type="text" id="nome_input" class="new-input">
 
-        <label for="newInput3" class="new-label">Telefone:</label>
-        <input type="text" id="newInput3" class="new-input">
+        <label for="telefone_input" class="new-label">Telefone:</label>
+        <input type="text" id="telefone_input" class="new-input">
 
-        <label for="newInput2" class="new-label">Rua:</label>
-        <input type="text" id="newInput2" class="new-input">
+        <label for="rua_input" class="new-label">Rua:</label>
+        <input type="text" id="rua_input" class="new-input">
 
         <label for="cmbOpcoes">Bairro:</label>
         <select id="cmbOpcoes">
@@ -179,10 +181,10 @@
 
         <label for="datePicker">Data de Entrega</label>
         <input type="date" id="datePicker"><br>
-        <label for="newInput4" class="new-label">Observações (opcional):</label>
-        <input type="text" id="newInput4" class="new-input">
+        <label for="observacao_input" class="new-label">Observações (opcional):</label>
+        <input type="text" id="observacao_input" class="new-input">
 
-        <button id="btnCriarEntrega" onclick="createEntrega()">Enviar Entrega</button>
+        <button id="btnCriarEntrega" onclick="preencherTabela()">Enviar Entrega</button>
     </div>
     <div class="divisao2">
         <label class="new-label">Caminhão: Volkswagen - Grande</label><br>
@@ -213,14 +215,20 @@
     <table>
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Cliente</th>
-                <th>Rua</th>
-                <th>Bairro</th>
+                <th>Id Entrega</th>
+                <th>Nome Cliente</th>
                 <th>Telefone</th>
-                <th>Data_Entrega</th>
-                <th>Hora_Entregue</th>
+                <th>Bairro</th>
+                <th>Rua</th>
+                <th>Situação</th>
+                <th>Data Cadastro</th>
+                <th>Hora Cadastro</th>
+                <th>Data Entrega</th>
+                <th>Hora Entrega</th>
                 <th>Observação</th>
+                <th>Vendedor</th>
+                <th>Data de Criação</th>
+                <th>Data de Atualização</th>
             </tr>
         </thead>
         <tbody id="tabelaBody">
@@ -229,16 +237,12 @@
 </div>
 
     <script>
-        function createEntrega() {
-            alert('Entrega Enviada');
-            resetCampos();
-        }
 
         function resetCampos() {
-            document.getElementById("newInput1").value = "";
-            document.getElementById("newInput2").value = "";
-            document.getElementById("newInput3").value = "";
-            document.getElementById("newInput4").value = "";
+            document.getElementById("id_input").value = "";
+            document.getElementById("nome_input").value = "";
+            document.getElementById("rua_input").value = "";
+            document.getElementById("observacao_input").value = "";
             document.getElementById("cmbOpcoes").selectedIndex = 0;
             document.getElementById("radOpcao1").checked = false;
             document.getElementById("radOpcao2").checked = false;
@@ -260,28 +264,48 @@
 
         setInterval(atualizarLabels, 120000);
 
-        function preencherTabela() {
-
-        var listaEntregas = [
-            { id: 1, cliente: 'Cliente 1', rua: 'Rua 1', bairro: 'Bairro 1', telefone: '123456789', dataEntrega: '01/01/2022', horaEntregue: '10:00', observacao: 'Observação 1' },
-            { id: 2, cliente: 'Cliente 2', rua: 'Rua 2', bairro: 'Bairro 2', telefone: '987654321', dataEntrega: '02/01/2022', horaEntregue: '15:30', observacao: 'Observação 2' },
-        ];
-
-        var tabelaBody = document.getElementById('tabelaBody');
-
-        tabelaBody.innerHTML = '';
-
-        listaEntregas.forEach(function (entrega) {
-            var row = tabelaBody.insertRow();
-            var keys = Object.keys(entrega);
-            keys.forEach(function (key) {
-                var cell = row.insertCell();
-                cell.appendChild(document.createTextNode(entrega[key]));
-            });
-        });
+        function obterDadosDaAPI() {
+            const url = 'http://127.0.0.1:3000/entregas'; // URL de exemplo, substitua pela sua URL real
+            
+            axios.get(url)
+                .then(response => {
+                    const dados = response.data; // Supondo que os dados estão no formato de um array de objetos
+                    preencherTabela(dados);
+                    
+                })
+                .catch(error => {
+                    console.error('Erro ao obter dados:', error);
+                });
         }
 
-        preencherTabela();
+        function preencherTabela(dados) {
+            const tabelaBody = document.getElementById('tabelaBody');
+
+            // Limpa o conteúdo atual da tabela
+            tabelaBody.innerHTML = '';
+
+            // Cria uma linha na tabela para cada conjunto de dados
+            dados.forEach(dado => {
+                const newRow = tabelaBody.insertRow();
+
+                // Adiciona células na nova linha
+                newRow.insertCell(0).innerText = dado.id_entrega;
+                newRow.insertCell(1).innerText = dado.nome_cliente;
+                newRow.insertCell(2).innerText = dado.telefone;
+                newRow.insertCell(3).innerText = dado.bairro;
+                newRow.insertCell(4).innerText = dado.rua;
+                newRow.insertCell(5).innerText = dado.situacao;
+                newRow.insertCell(6).innerText = dado.data_cadastro;
+                newRow.insertCell(7).innerText = dado.hora_cadastro;
+                newRow.insertCell(8).innerText = dado.data_entrega;
+                newRow.insertCell(9).innerText = dado.hora_entrega;
+                newRow.insertCell(10).innerText = dado.observacao;
+                newRow.insertCell(11).innerText = dado.vendedor;
+                newRow.insertCell(12).innerText = dado.createdAt;
+                newRow.insertCell(13).innerText = dado.updatedAt;
+            });
+        }
+        obterDadosDaAPI();
         setInterval(preencherTabela, 120000);
 
         document.addEventListener('DOMContentLoaded', function () {
