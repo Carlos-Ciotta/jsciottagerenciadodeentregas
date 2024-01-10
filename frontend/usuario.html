@@ -58,32 +58,32 @@
         <label for="radio">Horário de Entrega</label>
         <div class="radio-group" id="radio">
             <label>
-                <input type="radio" id="radOpcao" value="Manhã" name="opcaoRadio1"class=".radio-group"> Manhã
+                <input type="radio" id="radOpcao" value="Manhã" name="opcaoRadio1"class="radio-group"> Manhã
             </label>
             <label>
-                <input type="radio" id="radOpcao" value = "Tarde" name="opcaoRadio1"class=".radio-group"> Tarde
+                <input type="radio" id="radOpcao" value = "Tarde" name="opcaoRadio1"class="radio-group"> Tarde
             </label>
         </div>
 
         <label for="radio2">Vendedor</label>
         <div class="radio-group" id="radio2">
             <label>
-                <input type="radio" id="opcaoRadio" value="Terezinha" name="opcaoRadio" class=".radio-group"> Terezinha
+                <input type="radio" id="opcaoRadio" value="Terezinha" name="opcaoRadio" class="radio-group"> Terezinha
             </label>
             <label>
-                <input type="radio" id="opcaoRadio" value="Eliane" name="opcaoRadio"class=".radio-group"> Eliane
+                <input type="radio" id="opcaoRadio" value="Eliane" name="opcaoRadio"class="radio-group"> Eliane
             </label>
             <label>
-                <input type="radio" id="opcaoRadio" value="Elcir" name="opcaoRadio"class=".radio-group"> Elcir
+                <input type="radio" id="opcaoRadio" value="Elcir" name="opcaoRadio"class="radio-group"> Elcir
             </label>
             <label>
-                <input type="radio" id="opcaoRadio" value="Carlos Ciotta" name="opcaoRadio"class=".radio-group"> Carlos Ciotta
+                <input type="radio" id="opcaoRadio" value="Carlos Ciotta" name="opcaoRadio"class="radio-group"> Carlos Ciotta
             </label>
             <label>
-                <input type="radio" id="opcaoRadio" value="Evandro" name="opcaoRadio"class=".radio-group"> Evandro
+                <input type="radio" id="opcaoRadio" value="Evandro" name="opcaoRadio"class="radio-group"> Evandro
             </label>
             <label>
-                <input type="radio" id="opcaoRadio" value="Carlos Eduardo" name="opcaoRadio"class=".radio-group"> Carlos Eduardo
+                <input type="radio" id="opcaoRadio" value="Carlos Eduardo" name="opcaoRadio"class="radio-group"> Carlos Eduardo
             </label>
 
         </div>
@@ -93,9 +93,9 @@
         <label for="observacao_input" class="new-label">Observações (opcional):</label>
         <input type="text" id="observacao_input" class="new-input">
 
-        <button id="enviarBtn" onclick="postEntregas()">Enviar Entrega</button>
-    </div>
-    <div class="divisao2">
+        <button id="enviarBtn" class="button" onclick="postEntregas()">Enviar Entrega</button>
+</div>
+    <div class="container_metade">
         <label class="new-label">Caminhão: Volkswagen - Grande</label><br>
         <label class="new-label">Nº de Entregas para manha:</label>
         <label id="labelDiv2_1" class="new-label">0</label><br>
@@ -107,7 +107,7 @@
         <label class="new-label">17:45:30</label>
     </div>
 
-    <div class="divisao2">
+<div class="container_metade">
         <label class="new-label">Caminhão: Ford - Pequeno</label><br>
         <label class="new-label">Nº de Entregas para manha:</label>
         <label id="labelDiv3_2" class="new-label">0</label><br>
@@ -117,10 +117,10 @@
         <label id="labelDiv3_1" class="new-label">0</label><br>
         <label class="new-label">Previsão de Retorno tarde:</label>
         <label class="new-label">17:45:30</label><br>
-    </div>
+</div>
 
 </div>
-<div class="tabela-container">
+<div class="container">
     <table>
         <thead>
             <tr>

@@ -187,7 +187,6 @@ async getEntregaByVendedor (req,res, next){
             res.status(500).json({ error: 'Erro ao excluir entrega.' });
         }
     },
-
     async updateEntrega(req, res, next){
         const { id } = req.params;
         try {

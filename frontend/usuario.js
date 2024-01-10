@@ -44,6 +44,18 @@ function atualizarLabels() {
   document.getElementById("labelDiv3_2").innerText = "2";
 }
 
+function formatarData() {
+  const datePicker = document.getElementById('datePicker');
+  const dataSelecionada = datePicker.value;
+
+  if (dataSelecionada) {
+      const partesData = dataSelecionada.split('-');
+      const dataFormatada = `${partesData[2]}/${partesData[1]}/${partesData[0]}`;
+
+      datePicker.value = dataFormatada;
+  }
+}
+
 function preencherLinhasTabela(tbody, listaDados) {
   listaDados.forEach(dados => {
   const row = tbody.insertRow();
@@ -88,6 +100,7 @@ function postEntregas(){
   .then(response => {
       getEntregasFilter();
       resetCampos();
+      alert("Entrega Enviada !")
     })
   .catch(error => {
     console.error('Erro ao enviar dados:', error);
