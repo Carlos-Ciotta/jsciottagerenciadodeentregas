@@ -94,6 +94,16 @@
         <input type="text" id="observacao_input" class="new-input">
 
         <button id="enviarBtn" class="button" onclick="postEntregas()">Enviar Entrega</button>
+        
+        <button id="atualizarBtn" onclick="abrirPopup()" >Alterar Entrega</button>
+
+        <div id="popup" class="popup">
+            <p>Tem certeza dessa alteração ?</p>
+            <button class="button"onclick="atualizarEntrega()">Sim</button>
+            <button id = "button_pop_up" onclick="fecharPopup()">Não</button>
+        </div>
+        <div id="overlay" class="overlay" onclick="fecharPopup()"></div>
+
 </div>
     <div class="container_metade">
         <label class="new-label">Caminhão: Volkswagen - Grande</label><br>

@@ -13,6 +13,18 @@ function resetCampos() {
   document.getElementById("datePicker").value = "";
 }
 
+function abrirPopup() {
+  // Exibe o pop-up e o overlay
+  document.getElementById('popup').style.display = 'block';
+  document.getElementById('overlay').style.display = 'block';
+}
+
+function fecharPopup() {
+  // Oculta o pop-up e o overlay
+  document.getElementById('popup').style.display = 'none';
+  document.getElementById('overlay').style.display = 'none';
+}
+
 function ordenarOptions() {
   var select = document.getElementById('cmbOpcoes');
   var options = Array.from(select.options);
@@ -101,6 +113,37 @@ function postEntregas(){
       getEntregasFilter();
       resetCampos();
       alert("Entrega Enviada !")
+    })
+  .catch(error => {
+    console.error('Erro ao enviar dados:', error);
+     // Lógica adicional para lidar com erros, se necessário
+  });
+}
+
+function atualizarEntrega(){
+  alert("Aaa")
+  const id_entrega = document.getElementById('id_input').value;
+  const dadosEntrega = {
+    nome_cliente: document.getElementById('nome_input').value,
+    telefone: document.getElementById('telefone_input').value,
+    bairro: document.getElementById('cmbOpcoes').value,
+    rua: document.getElementById('rua_input').value,
+    situacao: "Aguardando",
+    data_cadastro: document.getElementById('datePicker').value,
+    hora_cadastro: document.querySelector("input[name=opcaoRadio1]:checked").value,
+    data_entrega: document.getElementById('datePicker').value,
+    hora_entrega: document.querySelector("input[name=opcaoRadio1]:checked").value,
+    observacao: document.getElementById('observacao_input').value,
+    vendedor: document.querySelector("input[name=opcaoRadio]:checked").value,
+  };
+
+  // Enviar a requisição POST usando axios
+  axios.put(`http://127.0.0.1:3000/entregas/${id_entrega}`, dadosEntrega)
+  .then(response => {
+      getEntregasFilter();
+      resetCampos();
+      fecharPopup();
+      alert("Entrega Alterada !")
     })
   .catch(error => {
     console.error('Erro ao enviar dados:', error);
