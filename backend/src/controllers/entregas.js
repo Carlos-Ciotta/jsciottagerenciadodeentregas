@@ -1,6 +1,43 @@
 const Entrega = require('../models/entregas');
 
 module.exports = {
+
+async getAllEntregasFilterUser (req,res, next){
+    const colunas = ['id_entrega', 'nome_cliente','telefone', 'rua', 'bairro', 'situacao','vendedor', 'observacao'];
+    try{
+        const entregas = await Entrega.findAll({attributes: colunas,
+            where: {situacao: ['Aguardando', 'Em andamento']}});
+        if (entregas){
+            res.status(200).json(entregas);
+        }
+        else{
+            const erro = new Error("Entregas não encontradas");
+            erro.status(404);
+            return next(erro);
+        }
+    } catch(error){
+        console.error('Erro ao obter entregas', error);
+    }
+},
+async getLeastEntregues (req,res, next){
+    const colunas = ['id_entrega', 'nome_cliente','telefone', 'rua', 'bairro', 'situacao','vendedor', 'observacao'];
+    try{
+        const entregas = await Entrega.findAll({attributes: colunas,
+            where: {situacao: ['Entregue']},
+            order: [['data_cadastro', 'DESC'], ['hora_cadastro', 'DESC']],
+            limit: 20});
+        if (entregas){
+            res.status(200).json(entregas);
+        }
+        else{
+            const erro = new Error("Entregas não encontradas");
+            erro.status(404);
+            return next(erro);
+        }
+    } catch(error){
+        console.error('Erro ao obter entregas', error);
+    }
+},
 async getAllEntregas (req,res, next){
     try{
         const entregas = await Entrega.findAll();
@@ -131,11 +168,11 @@ async getEntregaByVendedor (req,res, next){
     },
 
     async deleteEntrega(req, res, next){
-        const id = req.params.id;
+        const id_entrega = req.params.id;
         try{
-            const entrega = await Entrega.findByPk(id);
+            const entrega = await Entrega.findByPk(id_entrega);
             if(entrega){
-                Entrega.destroy({ where: { id } })
+                Entrega.destroy({ where: { id_entrega } })
                 res.status(200).json({
                     'status':'Entrega excluida'
                 });

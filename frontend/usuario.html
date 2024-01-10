@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ciotta- Gerênciamento de Entregas</title>
+    <script src="usuario.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="/frontend/style.css">
+</head>
+<body>
+
+<div class="container">
+    <div class="divisao1">
+        <label for="id_input" class="new-label" id="labelcomum">Número do Pedido:</label>
+        <input type="text" id="id_input" class="new-input">
+
+        <label for="nome_input" class="new-label">Nome do Cliente:</label>
+        <input type="text" id="nome_input" class="new-input">
+
+        <label for="telefone_input" class="new-label">Telefone:</label>
+        <input type="text" id="telefone_input" class="new-input">
+
+        <label for="rua_input" class="new-label">Rua:</label>
+        <input type="text" id="rua_input" class="new-input">
+
+        <label for="cmbOpcoes">Bairro:</label>
+        <select id="cmbOpcoes">
+            <option value="opcao1">Selecione o Bairro</option>
+            <option value="Esplanada">Esplanada</option>
+            <option value="Palmital">Palmital</option>
+            <option value="São Vendelino">São Vendelino</option>
+            <option value="Água Amarela">Água Amarela</option>
+            <option value="Seminário">Seminário</option>
+            <option value="Universitário">Universitário</option>
+            <option value="Linha das Palmeira">Linha das Palmeira</option>
+            <option value="Linha São Rafael">Linha São Rafael</option>
+            <option value="Lajeado Veríssimo">Lajeado Veríssimo</option>
+            <option value="Linha São Francisco">Linha São Francisco</option>
+            <option value="Linha Pequena">Linha Pequena</option>
+            <option value="Dom José Gomes">Dom José Gomes</option>
+            <option value="Aldeia Indígena Condá">Aldeia Indígena Condá</option>
+            <option value="Santa Maria">Santa Maria</option>
+            <option value="Santo Antônio">Santo Antônio</option>
+            <option value="Saic">Saic</option>
+            <option value="Maria Goretti">Maria Goretti</option>
+            <option value="Jardim Itália">Jardim Itália</option>
+            <option value="São Pedro">São Pedro</option>
+            <option value="Efapi">Efapi</option>
+            <option value="São Cristóvão">São Cristóvão</option>
+            <option value="Trevo">Trevo</option>
+            <option value="Passo dos Fortes">Passo dos Fortes</option>
+            <option value="Pinheirinho">Pinheirinho</option>
+            <option value="Cordilheira Alta">Cordilheira Alta</option>
+
+        </select>
+
+        <label for="radio">Horário de Entrega</label>
+        <div class="radio-group" id="radio">
+            <label>
+                <input type="radio" id="radOpcao" value="Manhã" name="opcaoRadio1"class=".radio-group"> Manhã
+            </label>
+            <label>
+                <input type="radio" id="radOpcao" value = "Tarde" name="opcaoRadio1"class=".radio-group"> Tarde
+            </label>
+        </div>
+
+        <label for="radio2">Vendedor</label>
+        <div class="radio-group" id="radio2">
+            <label>
+                <input type="radio" id="opcaoRadio" value="Terezinha" name="opcaoRadio" class=".radio-group"> Terezinha
+            </label>
+            <label>
+                <input type="radio" id="opcaoRadio" value="Eliane" name="opcaoRadio"class=".radio-group"> Eliane
+            </label>
+            <label>
+                <input type="radio" id="opcaoRadio" value="Elcir" name="opcaoRadio"class=".radio-group"> Elcir
+            </label>
+            <label>
+                <input type="radio" id="opcaoRadio" value="Carlos Ciotta" name="opcaoRadio"class=".radio-group"> Carlos Ciotta
+            </label>
+            <label>
+                <input type="radio" id="opcaoRadio" value="Evandro" name="opcaoRadio"class=".radio-group"> Evandro
+            </label>
+            <label>
+                <input type="radio" id="opcaoRadio" value="Carlos Eduardo" name="opcaoRadio"class=".radio-group"> Carlos Eduardo
+            </label>
+
+        </div>
+
+        <label for="datePicker">Data de Entrega</label>
+        <input type="date" id="datePicker"><br>
+        <label for="observacao_input" class="new-label">Observações (opcional):</label>
+        <input type="text" id="observacao_input" class="new-input">
+
+        <button id="enviarBtn" onclick="postEntregas()">Enviar Entrega</button>
+    </div>
+    <div class="divisao2">
+        <label class="new-label">Caminhão: Volkswagen - Grande</label><br>
+        <label class="new-label">Nº de Entregas para manha:</label>
+        <label id="labelDiv2_1" class="new-label">0</label><br>
+        <label class="new-label">Previsão de Retorno manha:</label>
+        <label class="new-label">11:45:30</label><br>
+        <label class="new-label">Nº de Entregas para tarde:</label>
+        <label id="labelDiv2_2" class="new-label">0</label><br>
+        <label class="new-label">Previsão de Retorno tarde:</label>
+        <label class="new-label">17:45:30</label>
+    </div>
+
+    <div class="divisao2">
+        <label class="new-label">Caminhão: Ford - Pequeno</label><br>
+        <label class="new-label">Nº de Entregas para manha:</label>
+        <label id="labelDiv3_2" class="new-label">0</label><br>
+        <label class="new-label">Previsão de Retorno manha: </label>
+        <label class="new-label">11:45:30</label><br>
+        <label class="new-label">Nº de Entregas para tarde: </label>
+        <label id="labelDiv3_1" class="new-label">0</label><br>
+        <label class="new-label">Previsão de Retorno tarde:</label>
+        <label class="new-label">17:45:30</label><br>
+    </div>
+
+</div>
+<div class="tabela-container">
+    <table>
+        <thead>
+            <tr>
+                <th>Pedido</th>
+                <th>Nome Cliente</th>
+                <th>Telefone</th>
+                <th>Rua</th>
+                <th>Bairro</th>
+                <th>Situação</th>
+                <th>Vendedor</th>
+                <th>Observação</th>
+            </tr>
+        </thead>
+        <tbody id="tabelaBody">
+        </tbody>
+    </table>
+</div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            ordenarOptions();
+            getEntregasFilter();
+        });
+
+    </script>
+
+</body>
+</html>
