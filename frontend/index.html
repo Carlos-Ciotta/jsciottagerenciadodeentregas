@@ -56,7 +56,7 @@
             margin-right: 5px;
         }
 
-        #btnCriarEntrega {
+        #enviarBtn {
             padding: 10px;
             background-color: #e381209d;
             color: #323232;
@@ -152,29 +152,29 @@
                 <input type="radio" id="radOpcao1" name="opcaoRadio1"> Manhã
             </label>
             <label>
-                <input type="radio" id="radOpcao2" name="opcaoRadio1"> Tarde
+                <input type="radio" id="radOpcao1" name="opcaoRadio1"> Tarde
             </label>
         </div>
 
         <label for="radio2">Vendedor</label>
         <div class="radio-group" id="radio2">
             <label>
-                <input type="radio" id="radOpcao3" name="opcaoRadio"> Terezinha
+                <input type="radio" id="radOpcao" name="opcaoRadio"> Terezinha
             </label>
             <label>
-                <input type="radio" id="radOpcao4" name="opcaoRadio"> Eliane
+                <input type="radio" id="radOpcao" name="opcaoRadio"> Eliane
             </label>
             <label>
-                <input type="radio" id="radOpcao5" name="opcaoRadio"> Elcir
+                <input type="radio" id="radOpcao" name="opcaoRadio"> Elcir
             </label>
             <label>
-                <input type="radio" id="radOpcao6" name="opcaoRadio"> Carlos Ciotta
+                <input type="radio" id="radOpcao" name="opcaoRadio"> Carlos Ciotta
             </label>
             <label>
-                <input type="radio" id="radOpcao7" name="opcaoRadio"> Evandro
+                <input type="radio" id="radOpcao" name="opcaoRadio"> Evandro
             </label>
             <label>
-                <input type="radio" id="radOpcao8" name="opcaoRadio"> Carlos Eduardo
+                <input type="radio" id="radOpcao" name="opcaoRadio"> Carlos Eduardo
             </label>
 
         </div>
@@ -184,7 +184,7 @@
         <label for="observacao_input" class="new-label">Observações (opcional):</label>
         <input type="text" id="observacao_input" class="new-input">
 
-        <button id="btnCriarEntrega" onclick="obterDadosDaAPI()">Enviar Entrega</button>
+        <button id="enviarBtn" >Enviar Entrega</button>
     </div>
     <div class="divisao2">
         <label class="new-label">Caminhão: Volkswagen - Grande</label><br>
@@ -227,8 +227,6 @@
                 <th>Hora Entrega</th>
                 <th>Observação</th>
                 <th>Vendedor</th>
-                <th>Data de Criação</th>
-                <th>Data de Atualização</th>
             </tr>
         </thead>
         <tbody id="tabelaBody">
@@ -237,6 +235,39 @@
 </div>
 
     <script>
+document.addEventListener("DOMContentLoaded", function () {
+    const enviarBtn = document.getElementById('enviarBtn');
+
+    enviarBtn.addEventListener('click', function () {
+        // Crie um objeto com os dados do formulário
+        const dadosEntrega = {
+            id_entrega: document.getElementById('id_input').value,
+            nome_cliente: document.getElementById('nome_input').value,
+            telefone: document.getElementById('telefone_input').value,
+            bairro: document.getElementById('cmbOpcoes').value,
+            rua: document.getElementById('rua_input').value,
+            situacao: "Aguardando",
+            data_cadastro: document.getElementById('datePicker').value,
+            hora_cadastro: "hora",
+            data_entrega: document.getElementById('datePicker').value,
+            hora_entrega: "hora",
+            observacao: document.getElementById('observacao_input').value,
+            vendedor: "Vendedor"
+        };
+
+        // Enviar a requisição POST usando axios
+        axios.post('http://127.0.0.1:3000/entregas', dadosEntrega)
+            .then(response => {
+                console.log('Dados enviados com sucesso:', response.data);
+                // Lógica adicional após o envio bem-sucedido, se necessário
+            })
+            .catch(error => {
+                console.error('Erro ao enviar dados:', error);
+                // Lógica adicional para lidar com erros, se necessário
+            });
+    });
+
+});
         document.addEventListener('DOMContentLoaded', function () {
             // Função para ordenar as opções alfabeticamente
             function ordenarOptions() {
