@@ -184,7 +184,7 @@
         <label for="observacao_input" class="new-label">Observações (opcional):</label>
         <input type="text" id="observacao_input" class="new-input">
 
-        <button id="btnCriarEntrega" onclick="preencherTabela()">Enviar Entrega</button>
+        <button id="btnCriarEntrega" onclick="obterDadosDaAPI()">Enviar Entrega</button>
     </div>
     <div class="divisao2">
         <label class="new-label">Caminhão: Volkswagen - Grande</label><br>
@@ -237,77 +237,6 @@
 </div>
 
     <script>
-
-        function resetCampos() {
-            document.getElementById("id_input").value = "";
-            document.getElementById("nome_input").value = "";
-            document.getElementById("rua_input").value = "";
-            document.getElementById("observacao_input").value = "";
-            document.getElementById("cmbOpcoes").selectedIndex = 0;
-            document.getElementById("radOpcao1").checked = false;
-            document.getElementById("radOpcao2").checked = false;
-            document.getElementById("radOpcao3").checked = false;
-            document.getElementById("radOpcao4").checked = false;
-            document.getElementById("radOpcao5").checked = false;
-            document.getElementById("radOpcao6").checked = false;
-            document.getElementById("radOpcao7").checked = false;
-            document.getElementById("radOpcao8").checked = false;
-            document.getElementById("datePicker").value = "";
-        }
-
-        function atualizarLabels() {
-            document.getElementById("labelDiv2_1").innerText = "1";
-            document.getElementById("labelDiv2_2").innerText = "1";
-            document.getElementById("labelDiv3_1").innerText = "2";
-            document.getElementById("labelDiv3_2").innerText = "2";
-        }
-
-        setInterval(atualizarLabels, 120000);
-
-        function obterDadosDaAPI() {
-            const url = 'http://127.0.0.1:3000/entregas'; // URL de exemplo, substitua pela sua URL real
-            
-            axios.get(url)
-                .then(response => {
-                    const dados = response.data; // Supondo que os dados estão no formato de um array de objetos
-                    preencherTabela(dados);
-                    
-                })
-                .catch(error => {
-                    console.error('Erro ao obter dados:', error);
-                });
-        }
-
-        function preencherTabela(dados) {
-            const tabelaBody = document.getElementById('tabelaBody');
-
-            // Limpa o conteúdo atual da tabela
-            tabelaBody.innerHTML = '';
-
-            // Cria uma linha na tabela para cada conjunto de dados
-            dados.forEach(dado => {
-                const newRow = tabelaBody.insertRow();
-
-                // Adiciona células na nova linha
-                newRow.insertCell(0).innerText = dado.id_entrega;
-                newRow.insertCell(1).innerText = dado.nome_cliente;
-                newRow.insertCell(2).innerText = dado.telefone;
-                newRow.insertCell(3).innerText = dado.bairro;
-                newRow.insertCell(4).innerText = dado.rua;
-                newRow.insertCell(5).innerText = dado.situacao;
-                newRow.insertCell(6).innerText = dado.data_cadastro;
-                newRow.insertCell(7).innerText = dado.hora_cadastro;
-                newRow.insertCell(8).innerText = dado.data_entrega;
-                newRow.insertCell(9).innerText = dado.hora_entrega;
-                newRow.insertCell(10).innerText = dado.observacao;
-                newRow.insertCell(11).innerText = dado.vendedor;
-                newRow.insertCell(12).innerText = dado.createdAt;
-                newRow.insertCell(13).innerText = dado.updatedAt;
-            });
-        }
-        obterDadosDaAPI();
-        setInterval(preencherTabela, 120000);
-
         document.addEventListener('DOMContentLoaded', function () {
             // Função para ordenar as opções alfabeticamente
             function ordenarOptions() {
@@ -337,6 +266,33 @@
             // Chama a função para ordenar as opções ao carregar a página
             ordenarOptions();
         });
+
+
+    function preencherLinhasTabela(tbody, listaDados) {
+        listaDados.forEach(dados => {
+        const row = tbody.insertRow();
+        Object.values(dados).forEach(value => {
+            const cell = row.insertCell();
+            cell.textContent = value;
+        });
+    });
+}
+
+// Exemplo de uso com uma lista de objetos
+document.addEventListener("DOMContentLoaded", function () {
+    const tabelaBody = document.getElementById("tabelaBody");
+
+    axios.get('http://127.0.0.1:3000/entregas')
+    .then(response => {
+        const dados = response.data;
+        console.log('Dados recebidos:', dados);
+        preencherLinhasTabela(tabelaBody, dados);
+    })
+    .catch(error => {
+        alert('Erro na requisição:', error);
+        alert('Status da requisição:', error.response.status);
+    });
+});
     </script>
 
 </body>
