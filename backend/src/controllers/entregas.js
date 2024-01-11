@@ -3,7 +3,7 @@ const Entrega = require('../models/entregas');
 module.exports = {
 
 async getAllEntregasFilterUser (req,res, next){
-    const colunas = ['id_entrega', 'nome_cliente','telefone', 'rua', 'bairro', 'situacao','vendedor', 'observacao'];
+    const colunas = ['id_entrega', 'nome_cliente', 'bairro', 'situacao','vendedor', 'observacao'];
     try{
         const entregas = await Entrega.findAll({attributes: colunas,
             where: {situacao: ['Aguardando', 'Em andamento']}});

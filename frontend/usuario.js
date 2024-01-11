@@ -2,7 +2,7 @@ const url_entregas = 'http://127.0.0.1:3000/entregas'
 const url_veiculos = "http://127.0.0.1:3000/veiculos"
 
 function resetCampos() {
-  let allradiobuttons = document.querySelectorAll('.radio-group');
+  let allradiobuttons = document.querySelectorAll('radio-group');
   document.getElementById("id_input").value = "";
   document.getElementById("nome_input").value = "";
   document.getElementById("rua_input").value = "";
@@ -95,9 +95,9 @@ function postEntregas(){
   const dadosEntrega = {
     id_entrega: document.getElementById('id_input').value,
     nome_cliente: document.getElementById('nome_input').value,
-    telefone: document.getElementById('telefone_input').value,
+    telefone: 49,
     bairro: document.getElementById('cmbOpcoes').value,
-    rua: document.getElementById('rua_input').value,
+    rua: "NULL",
     situacao: "Aguardando",
     data_cadastro: document.getElementById('datePicker').value,
     hora_cadastro: document.querySelector("input[name=opcaoRadio1]:checked").value,
@@ -124,9 +124,9 @@ function atualizarEntrega(){
   const id_entrega= document.getElementById('id_input_a').value;
   const dadosEntrega = {
     nome_cliente: document.getElementById('nome_input_a').value,
-    telefone: document.getElementById('telefone_input_a').value,
+    telefone: 49,
     bairro: document.getElementById('cmbOpcoes_a').value,
-    rua: document.getElementById('rua_input_a').value,
+    rua: "NULL",
     situacao: "Aguardando",
     data_cadastro: document.getElementById('datePicker_a').value,
     hora_cadastro: document.querySelector("input[name=opcaoRadio1_a]:checked").value,
