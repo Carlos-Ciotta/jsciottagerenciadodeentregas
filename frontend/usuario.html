@@ -98,7 +98,88 @@
         <button id="atualizarBtn" onclick="abrirPopup()" >Alterar Entrega</button>
 
         <div id="popup" class="popup">
-            <p>Tem certeza dessa alteração ?</p>
+            
+            <label for="id_input_a" class="new-label" id="labelcomum_a">Pedido ao ser Alterado</label>
+        <input type="text" id="id_input_a" class="new-input">
+
+        <label for="nome_input_a" class="new-label">Nome do Cliente:</label>
+        <input type="text" id="nome_input_a" class="new-input">
+
+        <label for="telefone_input_a" class="new-label">Telefone:</label>
+        <input type="text" id="telefone_input_a" class="new-input">
+
+        <label for="rua_input_a" class="new-label">Rua:</label>
+        <input type="text" id="rua_input_a" class="new-input">
+
+        <label for="cmbOpcoes_a">Bairro:</label>
+        <select id="cmbOpcoes_a">
+            <option value="opcao1">Selecione o Bairro</option>
+            <option value="Esplanada">Esplanada</option>
+            <option value="Palmital">Palmital</option>
+            <option value="São Vendelino">São Vendelino</option>
+            <option value="Água Amarela">Água Amarela</option>
+            <option value="Seminário">Seminário</option>
+            <option value="Universitário">Universitário</option>
+            <option value="Linha das Palmeira">Linha das Palmeira</option>
+            <option value="Linha São Rafael">Linha São Rafael</option>
+            <option value="Lajeado Veríssimo">Lajeado Veríssimo</option>
+            <option value="Linha São Francisco">Linha São Francisco</option>
+            <option value="Linha Pequena">Linha Pequena</option>
+            <option value="Dom José Gomes">Dom José Gomes</option>
+            <option value="Aldeia Indígena Condá">Aldeia Indígena Condá</option>
+            <option value="Santa Maria">Santa Maria</option>
+            <option value="Santo Antônio">Santo Antônio</option>
+            <option value="Saic">Saic</option>
+            <option value="Maria Goretti">Maria Goretti</option>
+            <option value="Jardim Itália">Jardim Itália</option>
+            <option value="São Pedro">São Pedro</option>
+            <option value="Efapi">Efapi</option>
+            <option value="São Cristóvão">São Cristóvão</option>
+            <option value="Trevo">Trevo</option>
+            <option value="Passo dos Fortes">Passo dos Fortes</option>
+            <option value="Pinheirinho">Pinheirinho</option>
+            <option value="Cordilheira Alta">Cordilheira Alta</option>
+
+        </select>
+
+        <label for="radio_a">Horário de Entrega</label>
+        <div class="radio-group" id="radio_a">
+            <label>
+                <input type="radio" id="radOpcao_a" value="Manhã" name="opcaoRadio1_a"class="radio-group"> Manhã
+            </label>
+            <label>
+                <input type="radio" id="radOpcao_a" value = "Tarde" name="opcaoRadio1_a"class="radio-group"> Tarde
+            </label>
+        </div>
+
+        <label for="radio2_a">Vendedor</label>
+        <div class="radio-group" id="radio2_a">
+            <label>
+                <input type="radio" id="opcaoRadio_a" value="Terezinha" name="opcaoRadio_a" class="radio-group"> Terezinha
+            </label>
+            <label>
+                <input type="radio" id="opcaoRadio_a" value="Eliane" name="opcaoRadio_a"class="radio-group"> Eliane
+            </label>
+            <label>
+                <input type="radio" id="opcaoRadio_a" value="Elcir" name="opcaoRadio_a"class="radio-group"> Elcir
+            </label>
+            <label>
+                <input type="radio" id="opcaoRadio_a" value="Carlos Ciotta" name="opcaoRadio_a"class="radio-group"> Carlos Ciotta
+            </label>
+            <label>
+                <input type="radio" id="opcaoRadio_a" value="Evandro" name="opcaoRadio_a"class="radio-group"> Evandro
+            </label>
+            <label>
+                <input type="radio" id="opcaoRadio_a" value="Carlos Eduardo" name="opcaoRadio_a"class="radio-group"> Carlos Eduardo
+            </label>
+
+        </div>
+
+        <label for="datePicker_a">Data de Entrega</label>
+        <input type="date" id="datePicker_a"><br>
+        <label for="observacao_input_a" class="new-label">Observações (opcional):</label>
+        <input type="text" id="observacao_input_a" class="new-input">
+        <p>Tem certeza dessa alteração ?</p>
             <button class="button"onclick="atualizarEntrega()">Sim</button>
             <button id = "button_pop_up" onclick="fecharPopup()">Não</button>
         </div>

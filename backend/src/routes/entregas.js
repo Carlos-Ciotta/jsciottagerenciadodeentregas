@@ -7,7 +7,7 @@ router.get('/entregas/allusuario', Entrega.getAllEntregasFilterUser);
 router.get('/entregas/entregue', Entrega.getLeastEntregues);
 router.post('/entregas', Entrega.createEntrega);
 router.get('/entregas/:id', Entrega.getEntregaById);
-router.delete('/entregas/:id', Entrega.deleteEntrega);
-router.put('/entregas/:id', Entrega.updateEntrega);
+router.delete('/entregas/:id_entrega', Entrega.deleteEntrega);
+router.put('/entregas/:id_entrega', Entrega.updateEntrega);
 
 module.exports = router;

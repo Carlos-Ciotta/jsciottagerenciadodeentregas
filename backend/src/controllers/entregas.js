@@ -188,11 +188,11 @@ async getEntregaByVendedor (req,res, next){
         }
     },
     async updateEntrega(req, res, next){
-        const { id } = req.params;
+        const { id_entrega } = req.params;
         try {
-        const [updatedRows] = await Entrega.update(req.body, { where: { id } });
+        const [updatedRows] = await Entrega.update(req.body, { where: { id_entrega } });
         if (updatedRows > 0) {
-        const updatedEntrega = await Entrega.findByPk(id);
+        const updatedEntrega = await Entrega.findByPk(id_entrega);
         res.status(200).json(updatedEntrega);
         } else {
         res.status(404).json({ error: 'Entrega não encontrada ou sem alterações.' });

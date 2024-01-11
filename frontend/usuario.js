@@ -121,20 +121,19 @@ function postEntregas(){
 }
 
 function atualizarEntrega(){
-  alert("Aaa")
-  const id_entrega = document.getElementById('id_input').value;
+  const id_entrega= document.getElementById('id_input_a').value;
   const dadosEntrega = {
-    nome_cliente: document.getElementById('nome_input').value,
-    telefone: document.getElementById('telefone_input').value,
-    bairro: document.getElementById('cmbOpcoes').value,
-    rua: document.getElementById('rua_input').value,
+    nome_cliente: document.getElementById('nome_input_a').value,
+    telefone: document.getElementById('telefone_input_a').value,
+    bairro: document.getElementById('cmbOpcoes_a').value,
+    rua: document.getElementById('rua_input_a').value,
     situacao: "Aguardando",
-    data_cadastro: document.getElementById('datePicker').value,
-    hora_cadastro: document.querySelector("input[name=opcaoRadio1]:checked").value,
-    data_entrega: document.getElementById('datePicker').value,
-    hora_entrega: document.querySelector("input[name=opcaoRadio1]:checked").value,
-    observacao: document.getElementById('observacao_input').value,
-    vendedor: document.querySelector("input[name=opcaoRadio]:checked").value,
+    data_cadastro: document.getElementById('datePicker_a').value,
+    hora_cadastro: document.querySelector("input[name=opcaoRadio1_a]:checked").value,
+    data_entrega: document.getElementById('datePicker_a').value,
+    hora_entrega: document.querySelector("input[name=opcaoRadio1_a]:checked").value,
+    observacao: document.getElementById('observacao_input_a').value,
+    vendedor: document.querySelector("input[name=opcaoRadio_a]:checked").value,
   };
 
   // Enviar a requisição POST usando axios
