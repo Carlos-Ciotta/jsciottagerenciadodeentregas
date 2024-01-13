@@ -2,11 +2,9 @@ const url_entregas = 'http://127.0.0.1:3000/entregas'
 const url_veiculos = "http://127.0.0.1:3000/veiculos"
 
 function resetCampos() {
-  let allradiobuttons = document.querySelectorAll('input[type="radio"][name="opcaoRadio1_a"]');
+  let allradiobuttons = document.querySelectorAll('.radio-group');
   document.getElementById("id_input").value = "";
   document.getElementById("nome_input").value = "";
-  document.getElementById("rua_input").value = "";
-  document.getElementById("telefone_input").value = "";
   document.getElementById("observacao_input").value = "";
   document.getElementById("cmbOpcoes").selectedIndex = 0;
   allradiobuttons.forEach(value => value.checked = false);
