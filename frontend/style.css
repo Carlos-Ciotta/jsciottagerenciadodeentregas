@@ -7,6 +7,7 @@ body {
 .container {
   display: flex;
   margin-bottom: 0px;
+  width: 100%;
 }
 
 .divisao1 {
@@ -71,6 +72,12 @@ body {
 
 .new-input {
   width: 95%;
+  padding: 8px;
+  margin-bottom: 10px;
+}
+
+.input_pedido {
+  width: 45%;
   padding: 8px;
   margin-bottom: 10px;
 }

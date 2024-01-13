@@ -2,7 +2,7 @@ const url_entregas = 'http://127.0.0.1:3000/entregas'
 const url_veiculos = "http://127.0.0.1:3000/veiculos"
 
 function resetCampos() {
-  let allradiobuttons = document.querySelectorAll('radio-group');
+  let allradiobuttons = document.querySelectorAll('input[type="radio"][name="opcaoRadio1_a"]');
   document.getElementById("id_input").value = "";
   document.getElementById("nome_input").value = "";
   document.getElementById("rua_input").value = "";
@@ -56,6 +56,16 @@ function atualizarLabels() {
   document.getElementById("labelDiv3_2").innerText = "2";
 }
 
+function formatarDataPost(data) {
+  const partesData = data.split("-");
+  if (partesData.length === 3) {
+      // Inverte as partes da data e as une com "-"
+      return `${partesData[2]}-${partesData[1]}-${partesData[0]}`;
+  }
+  // Retorna a data original se não estiver no formato esperado
+  return data;
+}
+
 function formatarData() {
   const datePicker = document.getElementById('datePicker');
   const dataSelecionada = datePicker.value;
@@ -91,6 +101,36 @@ function getEntregasFilter(){
     });
 }
 
+function getEntregaByIdbtn(){
+  const id_entrega= document.getElementById("id_input_a").value;
+  axios.get(`http://127.0.0.1:3000/entregas/${id_entrega}`)
+  .then(response => {
+    const dados = response.data;
+    preencherInput(dados);
+  })
+  .catch(error => {
+    alert('Erro na requisição:', error);
+    });
+}
+function preencherInput(dados){
+  
+  document.getElementById("nome_input_a").value = dados.nome_cliente;
+  document.getElementById("observacao_input_a").value = dados.observacao;
+  document.getElementById("datePicker_a").value = dados.data_entrega.split("T")[0];
+  const radioButtons = document.querySelectorAll('input[type="radio"][name="opcaoRadio1_a"]');
+  for (let i = 0; i < radioButtons.length; i++) {
+    if (radioButtons[i].value === dados.hora_entrega) {
+       radioButtons[i].checked = true;
+    }
+  }
+  const radioButtons1 = document.querySelectorAll('input[type="radio"][name="opcaoRadio_a"]');
+  for (let i = 0; i < radioButtons1.length; i++) {
+    if (radioButtons1[i].value === dados.vendedor) {
+       radioButtons1[i].checked = true;
+    }
+  }
+  document.getElementById("cmbOpcoes_a").value = dados.bairro;
+}
 function postEntregas(){
   const dadosEntrega = {
     id_entrega: document.getElementById('id_input').value,
@@ -101,7 +141,7 @@ function postEntregas(){
     situacao: "Aguardando",
     data_cadastro: document.getElementById('datePicker').value,
     hora_cadastro: document.querySelector("input[name=opcaoRadio1]:checked").value,
-    data_entrega: document.getElementById('datePicker').value,
+    data_entrega: formatarDataPost(document.getElementById('datePicker').value),
     hora_entrega: document.querySelector("input[name=opcaoRadio1]:checked").value,
     observacao: document.getElementById('observacao_input').value,
     vendedor: document.querySelector("input[name=opcaoRadio]:checked").value,
@@ -148,4 +188,5 @@ function atualizarEntrega(){
     console.error('Erro ao enviar dados:', error);
      // Lógica adicional para lidar com erros, se necessário
   });
+  fecharPopup();
 }

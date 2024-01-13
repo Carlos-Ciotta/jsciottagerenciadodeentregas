@@ -19,6 +19,23 @@ async getAllEntregasFilterUser (req,res, next){
         console.error('Erro ao obter entregas', error);
     }
 },
+async getAllEntregasFilterOperador (req,res, next){
+    const colunas = ['id_entrega', 'nome_cliente', 'bairro', 'hora_entrega', 'data_entrega', 'observacao','situacao'];
+    try{
+        const entregas = await Entrega.findAll({attributes: colunas,
+            where: {situacao: ['Aguardando']}});
+        if (entregas){
+            res.status(200).json(entregas);
+        }
+        else{
+            const erro = new Error("Entregas não encontradas");
+            erro.status(404);
+            return next(erro);
+        }
+    } catch(error){
+        console.error('Erro ao obter entregas', error);
+    }
+},
 async getLeastEntregues (req,res, next){
     const colunas = ['id_entrega', 'nome_cliente','telefone', 'rua', 'bairro', 'situacao','vendedor', 'observacao'];
     try{
@@ -55,19 +72,18 @@ async getAllEntregas (req,res, next){
 },
 
 async getEntregaById(req,res, next){
-    const id = req.params.id;
+    const id_entrega = req.params.id_entrega;
     try{
-        const entrega = await Entrega.findByPk(id);
+        const entrega = await Entrega.findOne({
+            where: {
+              id_entrega: id_entrega,
+            },
+          });
         if (entrega){
-            res.status(200).json({
-                'status': 'Sucesso',
-                'entrega':entrega
-            });
+            res.status(200).json(entrega)
         }
         else{
             const erro = new Error("Entrega não encontrada");
-            erro.status(404);
-            return next(erro);
         }
     } catch(error){
         console.error('Erro ao obter entrega', error);

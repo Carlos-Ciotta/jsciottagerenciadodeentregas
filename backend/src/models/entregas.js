@@ -30,7 +30,7 @@ const Entrega = sequelize.define('Entrega', {
     allowNull: false,
   },
   data_cadastro: {
-    type: DataTypes.DATE,
+    type: DataTypes.STRING,
     allowNull: false,
   },
   hora_cadastro: {
@@ -38,7 +38,7 @@ const Entrega = sequelize.define('Entrega', {
     allowNull: false,
   },
   data_entrega: {
-    type: DataTypes.DATE,
+    type: DataTypes.STRING,
     allowNull: false,
   },
   hora_entrega: {

@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 
-const sequelize = new Sequelize('mysql://root:c1eH6deEAg12f3aHCAGFegb15162ddGg@viaduct.proxy.rlwy.net:55196/railway');
+const sequelize = new Sequelize('mysql://root:FD-CBH5f65cG1HB-eE-11bdfc16g-55F@viaduct.proxy.rlwy.net:35180/railway');
 
 sequelize
     .authenticate()

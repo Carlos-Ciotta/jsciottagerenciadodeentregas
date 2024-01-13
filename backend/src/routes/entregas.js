@@ -4,6 +4,7 @@ const Entrega = require('../controllers/entregas');
 
 router.get('/entregas/all', Entrega.getAllEntregas);
 router.get('/entregas/allusuario', Entrega.getAllEntregasFilterUser);
+router.get('/entregas/alloperador', Entrega.getAllEntregasFilterOperador);
 router.get('/entregas/entregue', Entrega.getLeastEntregues);
 router.post('/entregas', Entrega.createEntrega);
 router.get('/entregas/:id_entrega', Entrega.getEntregaById);
