@@ -90,15 +90,14 @@ async getEntregaById(req,res, next){
     }
 },
 
-async getEntregaBySituacao (req,res, next){
-    const s = req.params.situacao;
+async getEntregaByIdVeiculo (req,res, next){
+    const id_v = req.params.situacao;
+    colunas = ['id_entrega', 'nome_cliente', 'bairro']
     try{
-        const entregas = await Entrega.findByPk(s);
+        const entregas = await Entrega.findAll({attributes: colunas,
+            where: {id_veiculo: id_v}});
         if (entregas){
-            res.status(200).json({
-                'status': 'Sucesso',
-                'entregas':entregas
-            });
+            res.status(200).json(entregas)
         }
         else{
             const erro = new Error("Entregas não encontrada");
@@ -172,10 +171,10 @@ async getEntregaByVendedor (req,res, next){
 
 
     async createEntrega(req, res){
-        const { id_entrega, nome_cliente, telefone, bairro, rua, situacao, data_cadastro, hora_cadastro, data_entrega, hora_entrega, observacao, vendedor } = req.body;
+        const { id_entrega, id_veiculo, nome_cliente, telefone, bairro, rua, situacao, data_cadastro, hora_cadastro, data_entrega, hora_entrega, observacao, vendedor } = req.body;
         console.log('Parâmetros recebidos:', req.body);
         try {
-        const entrega = await Entrega.create({ id_entrega, nome_cliente, telefone, bairro, rua, situacao, data_cadastro, hora_cadastro, data_entrega, hora_entrega, observacao, vendedor });
+        const entrega = await Entrega.create({ id_entrega,id_veiculo, nome_cliente, telefone, bairro, rua, situacao, data_cadastro, hora_cadastro, data_entrega, hora_entrega, observacao, vendedor });
         res.status(201).json(entrega);
         } catch (error) {
         console.error(error);
@@ -207,6 +206,22 @@ async getEntregaByVendedor (req,res, next){
         const { id_entrega } = req.params;
         try {
         const [updatedRows] = await Entrega.update(req.body, { where: { id_entrega } });
+        if (updatedRows > 0) {
+        const updatedEntrega = await Entrega.findByPk(id_entrega);
+        res.status(200).json(updatedEntrega);
+        } else {
+        res.status(404).json({ error: 'Entrega não encontrada ou sem alterações.' });
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Erro ao atualizar Entrega.' });
+    }
+    },
+    async updateVeiculoEntrega(req, res, next){
+        const { id_entrega } = req.params;
+        const id_veiculo = req.body.id_veiculo
+        try {
+        const [updatedRows] = await Entrega.update({id_veiculo:id_veiculo}, { where: { id_entrega } });
         if (updatedRows > 0) {
         const updatedEntrega = await Entrega.findByPk(id_entrega);
         res.status(200).json(updatedEntrega);

@@ -8,6 +8,10 @@ const Entrega = sequelize.define('Entrega', {
     primaryKey: true,
     allowNull: false
   },
+  id_veiculo: {
+    type: DataTypes.INTEGER,
+    allowNull: false
+  },
   nome_cliente: {
     type: DataTypes.STRING,
     allowNull: false,

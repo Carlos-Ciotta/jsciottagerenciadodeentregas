@@ -12,10 +12,10 @@
     <label for="radio">Veículo</label>
     <div class="radio-group" id="radio">
         <label>
-            <input type="radio" id="radOpcao1" name="opcaoRadio1"> Volkswagen - Grande
+            <input type="radio" id="radOpcao1" value="1" name="opcaoRadio1"> Volkswagen - Grande
         </label>
         <label>
-            <input type="radio" id="radOpcao2" name="opcaoRadio2"> Ford - Pequeno
+            <input type="radio" id="radOpcao2" value="2" name="opcaoRadio2"> Ford - Pequeno
         </label>
     </div>
     <table>
@@ -35,7 +35,7 @@
             <!-- O conteúdo da tabela será preenchido dinamicamente pela função JavaScript -->
         </tbody>
     </table>
-    <button class = "button" id="btnEnviarEntrega" onclick="updateSituacao()">Enviar Entrega</button>
+    <button class = "button" id="btnEnviarEntrega" onclick="updateEntregas()">Enviar Entrega</button>
 </div>
 
 <div class="container">
@@ -44,8 +44,9 @@
         <table>
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Descrição</th>
+                    <th>Pedido</th>
+                    <th>Cliente</th>
+                    <th>Bairro</th>
                     <th>Atrasar</th>
                     <th>Remover</th>
                     <th>Encerrar</th>
@@ -62,8 +63,9 @@
         <table>
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Descrição</th>
+                    <th>Pedido</th>
+                    <th>Cliente</th>
+                    <th>Bairro</th>
                     <th>Atrasar</th>
                     <th>Remover</th>
                     <th>Encerrar</th>
@@ -78,79 +80,12 @@
 </div>
 
 <script>
-    function obterLista() {
-        // Substitua este exemplo com sua própria lógica para obter a lista de dados
-        return [
-            { id: 1, nome: 'Nome1', bairro: 'Bairro1', hora_entrega: '10:00', data_entrega: '2024-01-06', observacao: 'Observacao1', situacao:"Aguardando" },
-            { id: 2, nome: 'Nome2', bairro: 'Bairro2', hora_entrega: '12:00', data_entrega: '2024-01-07', observacao: 'Observacao2' , situacao:"Aguardando"},
-            // Adicione mais itens conforme necessário
-        ];
-    }
+
 
     document.addEventListener('DOMContentLoaded', function () {
             getEntregasFilter();
         });
-    // Preencher as tabelas 1 e 2 com dados
-    function preencherTabelasSecundarias() {
-        var tabela1Corpo = document.getElementById('tabela1-corpo');
-        var tabela2Corpo = document.getElementById('tabela2-corpo');
 
-        // Substitua com sua própria lógica para obter dados para as tabelas secundárias
-        var dadosTabela1 = [
-            { id: 101, descricao: 'Descrição1' },
-            { id: 102, descricao: 'Descrição2' },
-        ];
-
-        var dadosTabela2 = [
-            { id: 201, descricao: 'Descrição3' },
-            { id: 202, descricao: 'Descrição4' },
-        ];
-
-        preencherTabelaSecundaria(tabela1Corpo, dadosTabela1);
-        preencherTabelaSecundaria(tabela2Corpo, dadosTabela2);
-    }
-
-    // Função para preencher tabelas secundárias
-    function preencherTabelaSecundaria(tabelaCorpo, dados) {
-        dados.forEach(function(item) {
-            var linha = document.createElement('tr');
-
-            // Adicionar as células da linha
-            for (var chave in item) {
-                var celula = document.createElement('td');
-                celula.textContent = item[chave];
-                linha.appendChild(celula);
-            }
-
-            // Adicionar checkbox à última célula da linha
-            for (var i = 0; i < 3; i++) {
-                var checkboxCelula = document.createElement('td');
-                var checkbox = document.createElement('input');
-                checkbox.type = 'checkbox';
-                checkbox.value = item.id;
-                checkbox.className = 'checkbox' + (i + 1);
-                checkboxCelula.appendChild(checkbox);
-                linha.appendChild(checkboxCelula);
-            }
-
-            // Adicionar a linha à tabela
-            tabelaCorpo.appendChild(linha);
-        });
-    }
-
-    preencherTabela();
-    preencherTabelasSecundarias();
-
-    function updateSituacao() {
-            alert('Entrega Enviada');
-            resetCampos();
-            preencherTabela();
-        }
-
-    function resetCampos() {
-            document.getElementById("radOpcao1").checked = false;
-            document.getElementById("radOpcao2").checked = false;
-        }
 </script>
 
 </body>
