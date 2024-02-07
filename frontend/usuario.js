@@ -143,6 +143,7 @@ function postEntregas(){
     hora_entrega: document.querySelector("input[name=opcaoRadio1]:checked").value,
     observacao: document.getElementById('observacao_input').value,
     vendedor: document.querySelector("input[name=opcaoRadio]:checked").value,
+    id_veiculo : 0
   };
 
   // Enviar a requisição POST usando axios

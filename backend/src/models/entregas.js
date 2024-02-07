@@ -16,28 +16,11 @@ const Entrega = sequelize.define('Entrega', {
     type: DataTypes.STRING,
     allowNull: false,
   },
-
-  telefone: {
-    type: DataTypes.BIGINT,
-    allowNull: false,
-  },
   bairro: {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  rua: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
   situacao: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  data_cadastro: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  hora_cadastro: {
     type: DataTypes.STRING,
     allowNull: false,
   },
