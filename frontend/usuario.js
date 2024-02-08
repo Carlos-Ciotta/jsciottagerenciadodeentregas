@@ -95,7 +95,7 @@ function preencherLinhasTabela(tbody, listaDados) {
 function getEntregasFilter(){
   const tabelaBody = document.getElementById("tabelaBody");
   tabelaBody.innerHTML = ''
-  axios.get('http://127.0.0.1:3000/entregas/allusuario')
+  axios.get('https://sistema-de-entregas-ciotta-25e16c0667db.herokuapp.com/entregas/allusuario')
   .then(response => {
     const dados = response.data;
     preencherLinhasTabela(tabelaBody, dados);
@@ -107,7 +107,7 @@ function getEntregasFilter(){
 
 function getEntregaByIdbtn(){
   const id_entrega= document.getElementById("id_input_a").value;
-  axios.get(`http://127.0.0.1:3000/entregas/${id_entrega}`)
+  axios.get(`https://sistema-de-entregas-ciotta-25e16c0667db.herokuapp.com/entregas/${id_entrega}`)
   .then(response => {
     const dados = response.data;
     preencherInput(dados);
@@ -149,7 +149,7 @@ function postEntregas(){
     };
   
     // Enviar a requisição POST usando axios
-    axios.post('http://127.0.0.1:3000/entregas', dadosEntrega)
+    axios.post('https://sistema-de-entregas-ciotta-25e16c0667db.herokuapp.com/entregas', dadosEntrega)
     .then(response => {
         getEntregasFilter();
         resetCampos();
@@ -178,7 +178,7 @@ function atualizarEntrega(){
   };
 
   // Enviar a requisição POST usando axios
-  axios.put(`http://127.0.0.1:3000/entregas/${id_entrega}`, dadosEntrega)
+  axios.put(`https://sistema-de-entregas-ciotta-25e16c0667db.herokuapp.com/entregas/${id_entrega}`, dadosEntrega)
   .then(response => {
       getEntregasFilter();
       resetCampos();
