@@ -34,7 +34,7 @@ const Entrega = sequelize.define('Entrega', {
   },
   observacao: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: true,
   },
   vendedor: {
     type: DataTypes.STRING,

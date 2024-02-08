@@ -1,5 +1,11 @@
-const url_entregas = 'http://127.0.0.1:3000/entregas'
-const url_veiculos = "http://127.0.0.1:3000/veiculos"
+function verifica_nulos(n_pedido, nome, bairro, hora, data, vendedor){
+  if (!n_pedido ||!nome ||bairro ||hora ||!data ||!vendedor){
+      return false;
+  }
+  else{
+      return true;
+  }
+}
 
 function resetCampos() {
   let allradiobuttons = document.querySelectorAll('.radio-group');
@@ -130,34 +136,30 @@ function preencherInput(dados){
   document.getElementById("cmbOpcoes_a").value = dados.bairro;
 }
 function postEntregas(){
-  const dadosEntrega = {
-    id_entrega: document.getElementById('id_input').value,
-    nome_cliente: document.getElementById('nome_input').value,
-    telefone: 49,
-    bairro: document.getElementById('cmbOpcoes').value,
-    rua: "NULL",
-    situacao: "Aguardando",
-    data_cadastro: document.getElementById('datePicker').value,
-    hora_cadastro: document.querySelector("input[name=opcaoRadio1]:checked").value,
-    data_entrega: formatarDataPost(document.getElementById('datePicker').value),
-    hora_entrega: document.querySelector("input[name=opcaoRadio1]:checked").value,
-    observacao: document.getElementById('observacao_input').value,
-    vendedor: document.querySelector("input[name=opcaoRadio]:checked").value,
-    id_veiculo : 0
-  };
-
-  // Enviar a requisição POST usando axios
-  axios.post('http://127.0.0.1:3000/entregas', dadosEntrega)
-  .then(response => {
-      getEntregasFilter();
-      resetCampos();
-      alert("Entrega Enviada !")
-    })
-  .catch(error => {
-    console.error('Erro ao enviar dados:', error);
-     // Lógica adicional para lidar com erros, se necessário
-  });
-}
+    const dadosEntrega = {
+      id_entrega: document.getElementById('id_input').value,
+      nome_cliente: document.getElementById('nome_input').value,
+      bairro: document.getElementById('cmbOpcoes').value,
+      situacao: "Aguardando",
+      data_entrega: formatarDataPost(document.getElementById('datePicker').value),
+      hora_entrega: document.querySelector("input[name=opcaoRadio1]:checked").value,
+      observacao: document.getElementById('observacao_input').value,
+      vendedor: document.querySelector("input[name=opcaoRadio]:checked").value,
+      id_veiculo : 0
+    };
+  
+    // Enviar a requisição POST usando axios
+    axios.post('http://127.0.0.1:3000/entregas', dadosEntrega)
+    .then(response => {
+        getEntregasFilter();
+        resetCampos();
+        alert("Entrega Enviada !")
+      })
+    .catch(error => {
+      console.error('Erro ao enviar dados:', error);
+       // Lógica adicional para lidar com erros, se necessário
+    });
+  }
 
 function atualizarEntrega(){
   const id_entrega= document.getElementById('id_input_a').value;

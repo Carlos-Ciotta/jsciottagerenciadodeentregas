@@ -1,13 +1,10 @@
 function resetCampos() {
-  document.getElementById("radOpcao1").checked = false;
-  document.getElementById("radOpcao2").checked = false;
+  let allradiobuttons = document.querySelectorAll('.radio-group');
+  allradiobuttons.forEach(value => value.checked = false);
 }
-
-
 
 function PreencherDashboardPrincipal(){
     const tabelaBody = document.getElementById("tabela-corpo");
-    tabelaBody.innerHTML = ''
     axios.get('http://127.0.0.1:3000/entregas/info/0/Aguardando')
     .then(response => {
       const dados = response.data;
@@ -19,7 +16,6 @@ function PreencherDashboardPrincipal(){
   }
 
   function PreencherDashboardFord(){
-    tabelaBody.innerHTML = ''
     const tabelaBody = document.getElementById("tabela1-corpo");
     axios.get('http://127.0.0.1:3000/entregas/info1/2/Em%20andamento')
     .then(response => {
@@ -32,7 +28,6 @@ function PreencherDashboardPrincipal(){
 }
 
 function PreencherDashboardVw(){
-  tabelaBody.innerHTML = ''
   const tabelaBody = document.getElementById("tabela2-corpo");
   axios.get('http://127.0.0.1:3000/entregas/info1/1/Em%20andamento')
   .then(response => {
@@ -45,6 +40,7 @@ function PreencherDashboardVw(){
 }
 
 function preencherLinhasTabelaCaminhoes(tbody, listaDados) {
+  tbody.innerHTML = ''
   listaDados.forEach(dados => {
     const row = tbody.insertRow();
 
@@ -54,8 +50,8 @@ function preencherLinhasTabelaCaminhoes(tbody, listaDados) {
         cell.textContent = value;
     });
 
-    // Adiciona três células extras com uma checkbox em cada uma
-    for (let i = 0; i < 3; i++) {
+    //Adiciona três células extras com uma checkbox em cada uma
+    for (let i = 0; i < 2; i++) {
         const checkboxCell = row.insertCell();
         const checkbox = document.createElement("input");
         checkbox.type = "checkbox";
@@ -66,6 +62,7 @@ function preencherLinhasTabelaCaminhoes(tbody, listaDados) {
 
 
 function preencherLinhasTabela(tbody, listaDados) {
+  tbody.innerHTML = ''
   listaDados.forEach(dados => {
       const row = tbody.insertRow();
 
@@ -111,7 +108,7 @@ function updateEntregas(){
     }
     alert("Entregas enviadas")
   }
-
+  
 }
 
 function updateEntregas1(tbody){
@@ -119,8 +116,8 @@ function updateEntregas1(tbody){
   const n_pedidos_e = [];
   for (let i = 0; i < tbody.rows.length; i++) {
     const row = tbody.rows[i];
-    const checkbox = row.cells[4].querySelector('input[type="checkbox"]');
-    const checkbox1 = row.cells[5].querySelector('input[type="checkbox"]');
+    const checkbox = row.cells[3].querySelector('input[type="checkbox"]');
+    const checkbox1 = row.cells[4].querySelector('input[type="checkbox"]');
     if (checkbox.checked) {
       const dado1 = row.cells[0].textContent;
       n_pedidos_s.push(dado1)
@@ -142,6 +139,10 @@ function atualizaVeiculoEntrega(id_entrega, id_veiculo, situacao){
   // Enviar a requisição POST usando axios
   axios.put(`http://127.0.0.1:3000/entregas/veiculo/${id_entrega}/${id_veiculo}/${situacao}`)
   .then(response => {
+    PreencherDashboardPrincipal();
+    PreencherDashboardVw();
+    PreencherDashboardFord();
+    resetCampos();
     })
   .catch(error => {
     console.error('Erro ao enviar dados:', error);
