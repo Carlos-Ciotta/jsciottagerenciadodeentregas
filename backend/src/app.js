@@ -9,4 +9,4 @@ app.use(cors());
 app.use('/', entregasRoutes); 
 
 app.listen(process.env.PORT || 3000, () => {
-console.log(`Servidor rodando na porta http://${HOST}:${PORT}`);});
+console.log(`Servidor rodando na porta 3000`);});
