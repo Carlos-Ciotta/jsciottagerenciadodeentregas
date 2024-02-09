@@ -11,7 +11,7 @@ app.use(cors());
 app.use('/', entregasRoutes); 
 
 app.get("/index", function(req,res){
-    res.sendFile(__dirname + "/frontend/index.html")
+    res.sendFile(__dirname + "/frontend/index.html/style.css")
 })
 app.get("/operador", function(req,res){
     res.sendFile(__dirname + "/frontend/operador.html")
