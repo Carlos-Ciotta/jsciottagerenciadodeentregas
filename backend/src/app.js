@@ -4,14 +4,14 @@ const entregasRoutes = require('../src/routes/entregas');
 const cors = require('cors');
 const mongoose = require('mongoose');
 
-app.use(express.static('frontend'));
+app.use(express.static('/frontend'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use('/', entregasRoutes); 
 
 app.get("/index", function(req,res){
-    res.sendFile(__dirname + "/frontend/index.html/style.css")
+    res.sendFile(__dirname + "/frontend/index.html")
 })
 app.get("/operador", function(req,res){
     res.sendFile(__dirname + "/frontend/operador.html")
