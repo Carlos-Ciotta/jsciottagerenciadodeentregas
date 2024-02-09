@@ -8,9 +8,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
-app.use("/operador", express.static("/frontend/operador"));
-app.use("/usuario", express.static("/frontend/usuario"));
-app.use("/index", express.static("/frontend/index"));
+app.use("/operador", express.static(__dirname, "/frontend/operador"));
+app.use("/usuario", express.static(__dirname, "/frontend/usuario"));
+app.use("/index", express.static(__dirname, "/frontend/index"));
 app.use('/', entregasRoutes); 
 
 /*app.get("/index", function(req,res){
