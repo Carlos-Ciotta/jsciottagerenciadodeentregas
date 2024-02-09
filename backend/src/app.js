@@ -9,8 +9,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use('/', entregasRoutes); 
 
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'frontend', 'index.html'));
+app.use(express.static(path.join(__dirname, 'frontend')));
+app.get('/index', (req, res) => {
+  res.sendFile(path.join(__dirname, 'frontend', 'index.html'));
 });
 
 mongoose.connect('mongodb+srv://carloseduardociotta:mongodb159753@ciotta.am99pad.mongodb.net/?retryWrites=true&w=majority')
