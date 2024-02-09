@@ -4,7 +4,7 @@ const entregasRoutes = require('../src/routes/entregas');
 const cors = require('cors');
 const mongoose = require('mongoose');
 
-app.use(express.static('/frontend'));
+app.use("/static", express.static("frontend"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
