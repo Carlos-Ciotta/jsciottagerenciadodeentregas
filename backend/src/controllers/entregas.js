@@ -157,7 +157,6 @@ async updateVeiculoEntrega(req, res, next){
 };*/
 module.exports = {
     async getAllEntregasFilterUser(req, res, next) {
-        const colunas = ['id_entrega', 'nome_cliente', 'bairro', 'situacao', 'vendedor', 'observacao', 'hora_entrega'];
         try {
             const entregas = await Entrega.find({ situacao: { $in: ['Aguardando', 'Em andamento'] }}).select('id_entrega nome_cliente bairro situacao vendedor observacao hora_entrega -_id');
             if (entregas.length > 0) {
@@ -175,9 +174,8 @@ module.exports = {
 
     async getAllEntregasFilterOperador(req, res, next) {
         const { situacao, id_veiculo } = req.params;
-        const colunas = ['id_entrega', 'nome_cliente', 'bairro', 'hora_entrega', 'data_entrega', 'observacao', 'situacao'];
         try {
-            const entregas = await Entrega.find({ situacao, id_veiculo }).select(colunas);
+            const entregas = await Entrega.find({ situacao, id_veiculo }).select('id_entrega nome_cliente bairro hora_entrega data_entrega observacao situacao -_id');
             if (entregas.length > 0) {
                 res.status(200).json(entregas);
             } else {
@@ -193,9 +191,8 @@ module.exports = {
 
     async getAllEntregasFilterOperador1(req, res, next) {
         const { situacao, id_veiculo } = req.params;
-        const colunas = ['id_entrega', 'nome_cliente', 'bairro'];
         try {
-            const entregas = await Entrega.find({ situacao, id_veiculo }).select(colunas);
+            const entregas = await Entrega.find({ situacao, id_veiculo }).select('id_entrega nome_cliente bairro -_id');
             if (entregas.length > 0) {
                 res.status(200).json(entregas);
             } else {
@@ -210,9 +207,8 @@ module.exports = {
     },
 
     async getLeastEntregues(req, res, next) {
-        const colunas = ['id_entrega', 'nome_cliente', 'bairro', 'situacao', 'vendedor', 'observacao'];
         try {
-            const entregas = await Entrega.find({ situacao: 'Entregue' }).limit(20).select(colunas);
+            const entregas = await Entrega.find({ situacao: 'Entregue' }).limit(20).select('id_entrega nome_cliente bairro situacao vendedor observacao -_id');
             if (entregas.length > 0) {
                 res.status(200).json(entregas);
             } else {

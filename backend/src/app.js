@@ -8,6 +8,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use('/', entregasRoutes); 
+app.use(express.static(path.join(__dirname, 'frontend/index.html')));
 mongoose.connect('mongodb+srv://carloseduardociotta:mongodb159753@ciotta.am99pad.mongodb.net/?retryWrites=true&w=majority')
 app.listen(process.env.PORT, () => {
 console.log(`Servidor rodando na porta 3000`);});
