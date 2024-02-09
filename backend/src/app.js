@@ -9,7 +9,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use('/', entregasRoutes); 
 
-app.get("/", function(req,res){
+app.get("/index", function(req,res){
     res.sendFile(__dirname + "/frontend/index.html")
 })
 
