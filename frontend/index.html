@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ciotta- Gerênciamento de Entregas</title>
+    <script src="operador.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="/frontend/style.css">
+</head>
+<body>
+    <h2>Interface de Login</h2>
+    
+    <label for="id_input" class="new-label" id="labelcomum">Senha:</label>
+    <input style="width: 10%;" type="text" id="id_input" class="new-input">
+    <button class="button" onclick="abrirOperador()">Administrar Entregas</button><br>
+    <button class="button" onclick="abrirUsuario()">Cadastrar Entregas</button>
+
+    <script>
+        function abrirOperador() {
+            const senha = document.getElementById('id_input').value
+            if (senha == 'admin2024') {
+                window.location.href = 'operador.html';
+            }
+            
+        }
+
+        function abrirUsuario() {
+            window.location.href = 'usuario.html';
+        }
+    </script>
+</body>

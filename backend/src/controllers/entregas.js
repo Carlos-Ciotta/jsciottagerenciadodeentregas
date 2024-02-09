@@ -159,7 +159,7 @@ module.exports = {
     async getAllEntregasFilterUser(req, res, next) {
         const colunas = ['id_entrega', 'nome_cliente', 'bairro', 'situacao', 'vendedor', 'observacao', 'hora_entrega'];
         try {
-            const entregas = await Entrega.find({ situacao: { $in: ['Aguardando', 'Em andamento'] } }).select(colunas);
+            const entregas = await Entrega.find({ situacao: { $in: ['Aguardando', 'Em andamento'] }}).select('id_entrega nome_cliente bairro situacao vendedor observacao hora_entrega -_id');
             if (entregas.length > 0) {
                 res.status(200).json(entregas);
             } else {
