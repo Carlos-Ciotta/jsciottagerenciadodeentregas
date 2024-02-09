@@ -1,6 +1,6 @@
 /*const Sequelize = require('sequelize');
 
-const sequelize = new Sequelize('mongodb+srv://ndstr:<password>@cluster0.pfyukxj.mongodb.net/?retryWrites=true&w=majority');
+const sequelize = new Sequelize('mongodb+srv://carloseduardociotta:mongodb159753@ciotta.am99pad.mongodb.net/?retryWrites=true&w=majority');
 
 sequelize
     .authenticate()
