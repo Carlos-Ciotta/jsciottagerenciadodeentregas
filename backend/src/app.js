@@ -13,6 +13,12 @@ app.use('/', entregasRoutes);
 app.get("/index", function(req,res){
     res.sendFile(__dirname + "/frontend/index.html")
 })
+app.get("/operador", function(req,res){
+    res.sendFile(__dirname + "/frontend/operador.html")
+})
+app.get("/usuario", function(req,res){
+    res.sendFile(__dirname + "/frontend/usuario.html")
+})
 
 mongoose.connect('mongodb+srv://carloseduardociotta:mongodb159753@ciotta.am99pad.mongodb.net/?retryWrites=true&w=majority')
 app.listen(process.env.PORT, () => {
