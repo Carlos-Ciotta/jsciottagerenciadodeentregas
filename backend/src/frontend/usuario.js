@@ -108,11 +108,13 @@ function getEntregasFilter(){
 
 function getEntregaByIdbtn(){
   const id_entrega= document.getElementById("id_input_a").value;
+  const id = document.getElementById('id_input_a');
   axios.get(`https://sistema-de-entregas-ciotta-25e16c0667db.herokuapp.com/entregas/${id_entrega}`)
   .then(response => {
     const dados = response.data;
     if(dados.situacao == "Aguardando"){
       preencherInput(dados);
+      id.disabled = true;
     }else{
       alert("Não é possível alterar essa entrega. Entrega já está em andamento")
     }
@@ -172,14 +174,14 @@ function atualizarEntrega(){
     nome_cliente: document.getElementById('nome_input_a').value,
     bairro: document.getElementById('cmbOpcoes_a').value,
     situacao: "Aguardando",
-    data_entrega: formatarDataPost(document.getElementById('datePicker').value),
+    data_entrega: formatarDataPost(document.getElementById('datePicker_a').value),
     hora_entrega: document.querySelector("input[name=opcaoRadio1_a]:checked").value,
     observacao: document.getElementById('observacao_input_a').value,
     vendedor: document.querySelector("input[name=opcaoRadio_a]:checked").value,
   };
-
-  if(!dadosEntrega.data_entrega){
-    alert("Preencha a Data de Entrega")
+  
+  if(dadosEntrega.data_entrega.length == 0){
+    alert("Preencha a Data")
   }else{
     axios.put(`https://sistema-de-entregas-ciotta-25e16c0667db.herokuapp.com/entregas/${id_entrega}`, dadosEntrega)
     .then(response => {

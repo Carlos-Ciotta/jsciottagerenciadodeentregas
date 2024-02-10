@@ -10,16 +10,17 @@
 <body>
     <h2>Interface de Login</h2>
     
-    <label for="id_input" class="new-label" id="labelcomum">Senha:</label>
-    <input style="width: 10%;" type="text" id="id_input" class="new-input">
+    <label for="id_psswrd" class="new-label" id="labelcomum">Senha:</label>
+    <input type="password" id="id_psswrd" >
     <button class="button" onclick="abrirOperador()">Administrar Entregas</button><br>
     <button class="button" onclick="abrirUsuario()">Cadastrar Entregas</button>
 
     <script>
         function abrirOperador() {
-            const senha = document.getElementById('id_input').value
+            const senha = document.getElementById('id_psswrd').value
             if (senha == 'admin2024') {
                 window.location.href = '/index/operador.html';
+                document.getElementById("id_psswrd").value = ""
             }
             else{
                 alert("Senha incorreta")
