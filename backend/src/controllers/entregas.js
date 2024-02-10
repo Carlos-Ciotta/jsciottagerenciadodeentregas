@@ -51,7 +51,7 @@ module.exports = {
         }
     },
 
-    async getLeastEntregues(req, res, next) {
+    /*async getLeastEntregues(req, res, next) {
         try {
             const entregas = await Entrega.find({ situacao: { $in: 'entregue'}}).limit(1).select('id_entrega nome_cliente bairro situacao vendedor observacao -_id');
             if (entregas.length > 0) {
@@ -65,7 +65,7 @@ module.exports = {
             console.error('Erro ao obter entregas', error);
             next(error);
         }
-    },
+    },*/
 
     async getEntregaById(req, res, next) {
         const id_entrega = req.params.id_entrega;
