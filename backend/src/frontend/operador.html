@@ -6,11 +6,12 @@
     <title>Ciotta- Gerênciamento de Entregas</title>
     <script src="operador.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <link rel="stylesheet" href="/backend/src/frontend/css/style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div>
     <label for="radio">Veículo</label>
+    <button class = "button" id="btnEntregues" onclick="abrirEntregues()">Ver Entregues</button>
     <div class="radio-group" id="radio">
         <label>
             <input type="radio" id="radOpcao1" class="radio-group" name="RADIO"> Volkswagen - Grande
@@ -86,7 +87,9 @@
             PreencherDashboardPrincipal();
             PreencherDashboardVw();
         });
-
+    function abrirEntregues(){
+        window.location.href = '/index/entregues.html';
+    }
 </script>
 
 </body>

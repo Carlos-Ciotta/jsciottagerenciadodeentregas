@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ciotta- Pedidos Entregues</title>
+    <script src="entregues.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Pedido</th>
+                    <th>Nome Cliente</th>
+                    <th>Bairro</th>
+                    <th>Situação</th>
+                    <th>Vendedor</th>
+                    <th>Observação</th>
+                </tr>
+            </thead>
+            <tbody id="tabelaBody">
+            </tbody>
+        </table>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            getLeastEntregues();
+        });
+
+    </script>
+</body>
+</html>

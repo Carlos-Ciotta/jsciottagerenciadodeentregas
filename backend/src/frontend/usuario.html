@@ -6,7 +6,7 @@
     <title>Ciotta- Gerênciamento de Entregas</title>
     <script src="usuario.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <link rel="stylesheet" href="/backend/src/frontend/css/style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -88,7 +88,7 @@
         <input type="text" id="observacao_input" class="new-input">
 
         <button id="enviarBtn" class="button" onclick="postEntregas()">Enviar Entrega</button>
-        
+        <button id="entregueBtn" onclick="abrirEntregues()" >Ver entregues</button>
         <button id="atualizarBtn" onclick="abrirPopup()" >Alterar Entrega</button>
 
         <div id="popup" class="popup">
@@ -207,7 +207,9 @@
             ordenarOptions();
             getEntregasFilter();
         });
-
+        function abrirEntregues(){
+            window.location.href = '/index/entregues.html';
+        }
     </script>
 
 </body>

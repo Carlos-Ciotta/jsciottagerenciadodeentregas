@@ -19,13 +19,17 @@
         function abrirOperador() {
             const senha = document.getElementById('id_input').value
             if (senha == 'admin2024') {
-                window.location.href = '/operador/operador.html';
+                window.location.href = '/index/operador.html';
+            }
+            else{
+                alert("Senha incorreta")
             }
             
         }
 
         function abrirUsuario() {
-            window.location.href = '/usuario/usuario.html';
+            window.location.href = '/index/usuario.html';
         }
     </script>
 </body>
+</html>
