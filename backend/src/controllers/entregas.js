@@ -4,13 +4,7 @@ module.exports = {
     async getAllEntregasFilterUser(req, res, next) {
         try {
             const entregas = await Entrega.find({ situacao: { $in: ['Aguardando', 'Em andamento'] }}).select('id_entrega nome_cliente bairro situacao vendedor observacao hora_entrega -_id');
-            if (entregas.length > 0) {
-                res.status(200).json(entregas);
-            } else {
-                const erro = new Error("Entregas não encontradas");
-                erro.status = 404;
-                return next(erro);
-            }
+            res.status(200).json(entregas);
         } catch (error) {
             console.error('Erro ao obter entregas', error);
             next(error);
@@ -21,13 +15,7 @@ module.exports = {
         const { situacao, id_veiculo } = req.params;
         try {
             const entregas = await Entrega.find({ situacao, id_veiculo }).select('id_entrega nome_cliente bairro hora_entrega data_entrega observacao situacao -_id');
-            if (entregas.length > 0) {
-                res.status(200).json(entregas);
-            } else {
-                const erro = new Error("Entregas não encontradas");
-                erro.status = 404;
-                return next(erro);
-            }
+            res.status(200).json(entregas);
         } catch (error) {
             console.error('Erro ao obter entregas', error);
             next(error);
@@ -38,34 +26,22 @@ module.exports = {
         const { situacao, id_veiculo } = req.params;
         try {
             const entregas = await Entrega.find({ situacao, id_veiculo }).select('id_entrega nome_cliente bairro -_id');
-            if (entregas.length > 0) {
-                res.status(200).json(entregas);
-            } else {
-                const erro = new Error("Entregas não encontradas");
-                erro.status = 404;
-                return next(erro);
-            }
+            res.status(200).json(entregas);
         } catch (error) {
             console.error('Erro ao obter entregas', error);
             next(error);
         }
     },
 
-    /*async getLeastEntregues(req, res, next) {
+    async getLeastEntregues(req, res, next) {
         try {
-            const entregas = await Entrega.find({ situacao: { $in: 'entregue'}}).limit(1).select('id_entrega nome_cliente bairro situacao vendedor observacao -_id');
-            if (entregas.length > 0) {
-                res.status(200).json(entregas);
-            } else {
-                const erro = new Error("Entregas não encontradas");
-                erro.status = 404;
-                return next(erro);
-            }
+            const entregas = await Entrega.find({ situacao: { $in: 'Entregue'}}).limit(1).select('id_entrega nome_cliente bairro situacao vendedor observacao -_id');
+            res.status(200).json(entregas);
         } catch (error) {
             console.error('Erro ao obter entregas', error);
             next(error);
         }
-    },*/
+    },
 
     async getEntregaById(req, res, next) {
         const id_entrega = req.params.id_entrega;

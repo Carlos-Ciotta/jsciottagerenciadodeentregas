@@ -88,6 +88,7 @@
         <input type="text" id="observacao_input" class="new-input">
 
         <button id="enviarBtn" class="button" onclick="postEntregas()">Enviar Entrega</button>
+        <button id="entreguesBtn" class="button" onclick="abreEntregues()">Entregues</button>
         <button id="atualizarBtn" onclick="abrirPopup()" >Alterar Entrega</button>
 
         <div id="popup" class="popup">
@@ -206,6 +207,9 @@
             ordenarOptions();
             getEntregasFilter();
         });
+        function abreEntregues(){
+        window.location.href = '/index/entregues.html';
+    }
     </script>
 
 </body>

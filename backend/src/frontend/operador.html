@@ -10,6 +10,7 @@
 </head>
 <body>
 <div>
+    <button id="entreguesBtn" class="button" onclick="abreEntregues()">Entregues</button><br>
     <label for="radio">Veículo</label>
     <div class="radio-group" id="radio">
         <label>
@@ -86,7 +87,7 @@
             PreencherDashboardPrincipal();
             PreencherDashboardVw();
         });
-    function abrirEntregues(){
+    function abreEntregues(){
         window.location.href = '/index/entregues.html';
     }
 </script>
