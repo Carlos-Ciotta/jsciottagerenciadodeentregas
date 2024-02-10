@@ -11,7 +11,7 @@ function preencherLinhasTabela(tbody, listaDados) {
   function getLeastEntregues(){
     const tabelaBody = document.getElementById("tabelaBody");
     tabelaBody.innerHTML = ''
-    axios.get('https://sistema-de-entregas-ciotta-25e16c0667db.herokuapp.com/entregas/allusuario')
+    axios.get('https://sistema-de-entregas-ciotta-25e16c0667db.herokuapp.com/entregas/entregue')
     .then(response => {
       const dados = response.data;
       preencherLinhasTabela(tabelaBody, dados);

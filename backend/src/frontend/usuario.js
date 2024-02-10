@@ -101,7 +101,11 @@ function getEntregaByIdbtn(){
   axios.get(`https://sistema-de-entregas-ciotta-25e16c0667db.herokuapp.com/entregas/${id_entrega}`)
   .then(response => {
     const dados = response.data;
-    preencherInput(dados);
+    if(dados.situacao == "Aguardando"){
+      preencherInput(dados);
+    }else{
+      alert("Não é possível alterar essa entrega. Entrega já está em andamento")
+    }
   })
   .catch(error => {
     alert('Erro na requisição:', error);
