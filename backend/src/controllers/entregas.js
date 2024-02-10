@@ -111,7 +111,7 @@ module.exports = {
     async updateEntrega(req, res, next) {
         const { id_entrega } = req.params;
         try {
-            const updatedEntrega = await Entrega.findByIdAndUpdate(id_entrega, req.body, { new: true });
+            const updatedEntrega = await Entrega.findOneAndUpdate({ id_entrega: id_entrega }, req.body, { new: true });
             if (updatedEntrega) {
                 res.status(200).json(updatedEntrega);
             } else {
@@ -126,7 +126,7 @@ module.exports = {
     async updateVeiculoEntrega(req, res, next) {
         const { id_entrega, id_veiculo, situacao } = req.params;
         try {
-            const updatedEntrega = await Entrega.findByIdAndUpdate(id_entrega, { id_veiculo, situacao }, { new: true });
+            const updatedEntrega = await Entrega.findOneAndUpdate({ id_entrega: id_entrega }, { id_veiculo, situacao }, { new: true });
             if (updatedEntrega) {
                 res.status(200).json(updatedEntrega);
             } else {
