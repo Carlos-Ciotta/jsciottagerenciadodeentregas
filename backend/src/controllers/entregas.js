@@ -53,7 +53,7 @@ module.exports = {
 
     async getLeastEntregues(req, res, next) {
         try {
-            const entregas = await Entrega.find({ situacao: { $in: 'entregue'}}).limit(20).select('id_entrega nome_cliente bairro situacao vendedor observacao -_id');
+            const entregas = await Entrega.find({ situacao: { $in: 'entregue'}}).limit(1).select('id_entrega nome_cliente bairro situacao vendedor observacao -_id');
             if (entregas.length > 0) {
                 res.status(200).json(entregas);
             } else {
