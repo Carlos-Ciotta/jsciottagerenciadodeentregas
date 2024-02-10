@@ -181,7 +181,7 @@ function atualizarEntrega(){
   // Enviar a requisição POST usando axios
   axios.put(`https://sistema-de-entregas-ciotta-25e16c0667db.herokuapp.com/entregas/${id_entrega}`, dadosEntrega)
   .then(response => {
-    if(dadosEntrega.data_entrega,length != 0 ){
+    if(dadosEntrega.data_entrega.length != 0 ){
       getEntregasFilter();
       resetCampos_a();
       fecharPopup();
