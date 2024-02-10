@@ -3,7 +3,7 @@ const Entrega = require('../models/entregas');
 module.exports = {
     async getAllEntregasFilterUser(req, res, next) {
         try {
-            const entregas = await Entrega.find({ situacao: { $in: ['Aguardando', 'Em andamento'] }}).select('id_entrega nome_cliente bairro situacao vendedor observacao hora_entrega data_entrega -_id');
+            const entregas = await Entrega.find({ situacao: { $in: ['Aguardando', 'Em andamento'] }}).sort({ situacao: 1 }).select('id_entrega nome_cliente bairro situacao vendedor observacao hora_entrega data_entrega -_id');
             res.status(200).json(entregas);
         } catch (error) {
             console.error('Erro ao obter entregas', error);

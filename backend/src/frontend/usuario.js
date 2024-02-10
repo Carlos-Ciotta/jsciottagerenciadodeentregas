@@ -178,13 +178,13 @@ function atualizarEntrega(){
     vendedor: document.querySelector("input[name=opcaoRadio_a]:checked").value,
   };
 
-  if(dadosEntrega.data_entrega !=0){
+  if(dadosEntrega.data_entrega.length !=0){
     axios.put(`https://sistema-de-entregas-ciotta-25e16c0667db.herokuapp.com/entregas/${id_entrega}`, dadosEntrega)
   .then(response => {
-      getEntregasFilter();
+      alert("Entrega Alterada !")
       resetCampos_a();
       fecharPopup();
-      alert("Entrega Alterada !")
+      getEntregasFilter();
     })
   .catch(error => {
     console.error('Erro ao enviar dados:', error);
