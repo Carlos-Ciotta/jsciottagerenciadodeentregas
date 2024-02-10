@@ -178,20 +178,20 @@ function atualizarEntrega(){
     vendedor: document.querySelector("input[name=opcaoRadio_a]:checked").value,
   };
 
-  if(dadosEntrega.data_entrega.length !=0){
-    axios.put(`https://sistema-de-entregas-ciotta-25e16c0667db.herokuapp.com/entregas/${id_entrega}`, dadosEntrega)
-  .then(response => {
-      alert("Entrega Alterada !")
-      resetCampos_a();
-      fecharPopup();
-      getEntregasFilter();
-    })
-  .catch(error => {
-    console.error('Erro ao enviar dados:', error);
-     // Lógica adicional para lidar com erros, se necessário
-  });
-  }else{
+  if(!dadosEntrega.data_entrega){
     alert("Preencha a Data de Entrega")
+  }else{
+    axios.put(`https://sistema-de-entregas-ciotta-25e16c0667db.herokuapp.com/entregas/${id_entrega}`, dadosEntrega)
+    .then(response => {
+        alert("Entrega Alterada !")
+        resetCampos_a();
+        fecharPopup();
+        getEntregasFilter();
+      })
+    .catch(error => {
+      console.error('Erro ao enviar dados:', error);
+       // Lógica adicional para lidar com erros, se necessário
+    });
   }
   
 }
