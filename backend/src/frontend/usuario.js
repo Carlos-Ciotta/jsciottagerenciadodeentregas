@@ -7,6 +7,15 @@ function resetCampos() {
   allradiobuttons.forEach(value => value.checked = false);
   document.getElementById("datePicker").value = "";
 }
+function resetCampos_a() {
+  let allradiobuttons = document.querySelectorAll('.radio-group');
+  document.getElementById("id_input_a").value = "";
+  document.getElementById("nome_input_a").value = "";
+  document.getElementById("observacao_input_a").value = "";
+  document.getElementById("cmbOpcoes_a").selectedIndex = 0;
+  allradiobuttons.forEach(value => value.checked = false);
+  document.getElementById("datePicker_a").value = "";
+}
 
 function abrirPopup() {
   // Exibe o pop-up e o overlay
@@ -16,6 +25,7 @@ function abrirPopup() {
 
 function fecharPopup() {
   // Oculta o pop-up e o overlay
+  resetCampos_a();
   document.getElementById('popup').style.display = 'none';
   document.getElementById('overlay').style.display = 'none';
 }
@@ -162,7 +172,7 @@ function atualizarEntrega(){
     nome_cliente: document.getElementById('nome_input_a').value,
     bairro: document.getElementById('cmbOpcoes_a').value,
     situacao: "Aguardando",
-    data_entrega: document.getElementById('datePicker_a').value,
+    data_entrega: formatarDataPost(document.getElementById('datePicker').value),
     hora_entrega: document.querySelector("input[name=opcaoRadio1_a]:checked").value,
     observacao: document.getElementById('observacao_input_a').value,
     vendedor: document.querySelector("input[name=opcaoRadio_a]:checked").value,
@@ -171,10 +181,14 @@ function atualizarEntrega(){
   // Enviar a requisição POST usando axios
   axios.put(`https://sistema-de-entregas-ciotta-25e16c0667db.herokuapp.com/entregas/${id_entrega}`, dadosEntrega)
   .then(response => {
+    if(dadosEntrega.data_entrega,length != 0 ){
       getEntregasFilter();
-      resetCampos();
+      resetCampos_a();
       fecharPopup();
       alert("Entrega Alterada !")
+    }else{
+      alert("Preencha a Data")
+    }
     })
   .catch(error => {
     console.error('Erro ao enviar dados:', error);

@@ -192,8 +192,8 @@
                 <th>Nome Cliente</th>
                 <th>Bairro</th>
                 <th>Situação</th>
-                <th>Hora Entrega</th>
                 <th>Data Entrega</th>
+                <th>Hora Entrega</th>
                 <th>Observação</th>
                 <th>Vendedor</th>
             </tr>
@@ -207,6 +207,19 @@
         document.addEventListener('DOMContentLoaded', function () {
             ordenarOptions();
             getEntregasFilter();
+            moment.tz.setDefault('America/Sao_Paulo');
+
+        // Verifica o horário e executa getEntregasFilter() se estiver dentro do intervalo especificado
+        setInterval(function () {
+            const agora = moment(); // Obtém a data e hora atual em Brasília
+            const hora = agora.hours();
+            const minutos = agora.minutes();
+
+            // Verifica se está dentro dos intervalos de tempo especificados
+            if ((hora >= 7 && hora < 11 && minutos <= 40) || (hora >= 13 && hora < 17 && minutos <= 40)) {
+                getEntregasFilter();
+            }
+            }, 29 * 60 * 1000); // Executa a cada 29 minutos
         });
         function abreEntregues(){
         window.location.href = '/index/entregues.html';
