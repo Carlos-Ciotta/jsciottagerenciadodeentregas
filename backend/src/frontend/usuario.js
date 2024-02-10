@@ -156,12 +156,8 @@ function atualizarEntrega(){
   const id_entrega= document.getElementById('id_input_a').value;
   const dadosEntrega = {
     nome_cliente: document.getElementById('nome_input_a').value,
-    telefone: 49,
     bairro: document.getElementById('cmbOpcoes_a').value,
-    rua: "NULL",
     situacao: "Aguardando",
-    data_cadastro: document.getElementById('datePicker_a').value,
-    hora_cadastro: document.querySelector("input[name=opcaoRadio1_a]:checked").value,
     data_entrega: document.getElementById('datePicker_a').value,
     hora_entrega: document.querySelector("input[name=opcaoRadio1_a]:checked").value,
     observacao: document.getElementById('observacao_input_a').value,

@@ -70,7 +70,7 @@ module.exports = {
     async getEntregaById(req, res, next) {
         const id_entrega = req.params.id_entrega;
         try {
-            const entrega = await Entrega.findById(id_entrega);
+            const entrega = await Entrega.findOne({id_entrega:id_entrega});
             if (entrega) {
                 res.status(200).json(entrega);
             } else {
