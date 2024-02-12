@@ -143,18 +143,48 @@ function preencherInput(dados){
   document.getElementById("cmbOpcoes_a").value = dados.bairro;
 }
 function postEntregas(){
-    const dadosEntrega = {
-      id_entrega: document.getElementById('id_input').value,
-      nome_cliente: document.getElementById('nome_input').value,
-      bairro: document.getElementById('cmbOpcoes').value,
-      situacao: "Aguardando",
-      data_entrega: formatarDataPost(document.getElementById('datePicker').value),
-      hora_entrega: document.querySelector("input[name=opcaoRadio1]:checked").value,
-      observacao: document.getElementById('observacao_input').value,
-      vendedor: document.querySelector("input[name=opcaoRadio]:checked").value,
-      id_veiculo : 0
-    };
+  const id_entrega = document.getElementById('id_input').value;
+  const nome_cliente = document.getElementById('nome_input').value;
+  const bairro = document.getElementById('cmbOpcoes').value;
+  const datePickerValue = document.getElementById('datePicker').value;
+  const hora_entrega = document.querySelector("input[name=opcaoRadio1]:checked")?.value;
+  const observacao = document.getElementById('observacao_input').value;
+  const vendedor = document.querySelector("input[name=opcaoRadio]:checked")?.value;
   
+  // Verificar se os campos estão vazios
+  if (!id_entrega ) {
+    alert('Preencha o número de pedido apenas com números');
+  }
+  else if(!nome_cliente){
+    alert("Preencha o nome do cliente");
+  }
+  else if(bairro == 'Selecione o Bairro'){
+    alert("Selecione um bairro");
+  }
+  else if(!datePickerValue){
+    alert("Selecione uma data de entrega");
+  }
+  else if(!hora_entrega){
+    alert("Selecione o horario de entrega");
+  }
+  else if(!vendedor){
+    alert("Selecione o vendedor");
+  } else {
+    // Formatar a data de entrega
+    const data_entrega = formatarDataPost(datePickerValue);
+  
+    // Criar o objeto dadosEntrega
+    const dadosEntrega = {
+      id_entrega: id_entrega,
+      nome_cliente: nome_cliente,
+      bairro: bairro,
+      situacao: "Aguardando",
+      data_entrega: data_entrega,
+      hora_entrega: hora_entrega,
+      observacao: observacao,
+      vendedor: vendedor,
+      id_veiculo: 0
+    };
     // Enviar a requisição POST usando axios
     axios.post('https://sistema-de-entregas-ciotta-25e16c0667db.herokuapp.com/entregas', dadosEntrega)
     .then(response => {
@@ -167,6 +197,7 @@ function postEntregas(){
        // Lógica adicional para lidar com erros, se necessário
     });
   }
+}
 
 function atualizarEntrega(){
   const id_entrega= document.getElementById('id_input_a').value;
