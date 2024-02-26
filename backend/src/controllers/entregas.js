@@ -112,5 +112,19 @@ module.exports = {
             console.error(error);
             res.status(500).json({ error: 'Erro ao atualizar Entrega.' });
         }
-    }
+    },
+    async excluirPrimeirosRegistros() {
+        try {
+            // Encontrar os primeiros 40 registros
+            const registrosParaExcluir = await Entrega.find().limit(4);
+        
+            // Excluir os registros encontrados
+            await Entrega.deleteMany({ _id: { $in: registrosParaExcluir.map(registro => registro._id) } });
+        
+            console.log('Os primeiros 40 registros foram excluídos com sucesso.');
+          } catch (error) {
+            console.error('Erro ao excluir os primeiros 40 registros:', error);
+          }
+
+        } 
 };

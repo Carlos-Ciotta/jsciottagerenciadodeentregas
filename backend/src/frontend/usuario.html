@@ -24,8 +24,9 @@
             <option value="Esplanada">Esplanada</option>
             <option value="Palmital">Palmital</option>
             <option value="São Vendelino">São Vendelino</option>
-            <option value="Água Amarela">Água Amarela</option>
+            <option value="Agua Amarela">Agua Amarela</option>
             <option value="Seminário">Seminário</option>
+            <option value="Quedas do Palmital">Quedas do Palmital</option>
             <option value="Universitário">Universitário</option>
             <option value="Linha das Palmeira">Linha das Palmeira</option>
             <option value="Linha São Rafael">Linha São Rafael</option>
@@ -45,6 +46,8 @@
             <option value="Trevo">Trevo</option>
             <option value="Passo dos Fortes">Passo dos Fortes</option>
             <option value="Pinheirinho">Pinheirinho</option>
+            <option value="Expoente">Expoente</option>
+            <option value="Monte Castelo">Monte Castelo</option>
             <option value="Cordilheira Alta">Cordilheira Alta</option>
 
         </select>
@@ -106,8 +109,9 @@
             <option value="Esplanada">Esplanada</option>
             <option value="Palmital">Palmital</option>
             <option value="São Vendelino">São Vendelino</option>
-            <option value="Água Amarela">Água Amarela</option>
+            <option value="Agua Amarela">Agua Amarela</option>
             <option value="Seminário">Seminário</option>
+            <option value="Quedas do Palmital">Quedas do Palmital</option>
             <option value="Universitário">Universitário</option>
             <option value="Linha das Palmeira">Linha das Palmeira</option>
             <option value="Linha São Rafael">Linha São Rafael</option>
@@ -127,6 +131,8 @@
             <option value="Trevo">Trevo</option>
             <option value="Passo dos Fortes">Passo dos Fortes</option>
             <option value="Pinheirinho">Pinheirinho</option>
+            <option value="Expoente">Expoente</option>
+            <option value="Monte Castelo">Monte Castelo</option>
             <option value="Cordilheira Alta">Cordilheira Alta</option>
 
         </select>
@@ -210,16 +216,6 @@
             moment.tz.setDefault('America/Sao_Paulo');
 
         // Verifica o horário e executa getEntregasFilter() se estiver dentro do intervalo especificado
-        setInterval(function () {
-            const agora = moment(); // Obtém a data e hora atual em Brasília
-            const hora = agora.hours();
-            const minutos = agora.minutes();
-
-            // Verifica se está dentro dos intervalos de tempo especificados
-            if ((hora >= 7 && hora < 11 && minutos <= 40) || (hora >= 13 && hora < 17 && minutos <= 40)) {
-                getEntregasFilter();
-            }
-            }, 29 * 60 * 1000); // Executa a cada 29 minutos
         });
         function abreEntregues(){
         window.location.href = '/index/entregues.html';

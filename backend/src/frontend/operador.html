@@ -38,6 +38,7 @@
         </tbody>
     </table>
     <button class = "button" id="btnEnviarEntrega" onclick="updateEntregas()">Enviar Entrega</button>
+    <button class = "button" id="btnEcluir" onclick="excluir()">Excluir</button>
 </div>
 
 <div class="container">
@@ -86,22 +87,18 @@
             PreencherDashboardFord();
             PreencherDashboardPrincipal();
             PreencherDashboardVw();
-
-            setInterval(function () {
-            const agora = moment(); // Obtém a data e hora atual em Brasília
-            const hora = agora.hours();
-            const minutos = agora.minutes();
-
-            // Verifica se está dentro dos intervalos de tempo especificados
-            if ((hora >= 7 && hora < 11 && minutos <= 40) || (hora >= 13 && hora < 17 && minutos <= 40)) {
-                PreencherDashboardFord();
-                PreencherDashboardPrincipal();
-                PreencherDashboardVw();
-            }
-            }, 29 * 60 * 1000); // Executa a cada 29 minutos
         });
     function abreEntregues(){
         window.location.href = '/index/entregues.html';
+    }
+    function excluir(){
+    app.delete('https://sistema-de-entregas-ciotta-25e16c0667db.herokuapp.com/entregas/testeecluir')
+        .then(response => {
+        alert("A")
+    })
+    .catch(error => {
+        alert('Erro na requisição:', error);
+        });
     }
 </script>
 
