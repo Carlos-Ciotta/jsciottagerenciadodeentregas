@@ -1,3 +1,5 @@
+//const URL = 'http://localhost:3000';
+const URL = 'https://sistema-de-entregas-ciotta-25e16c0667db.herokuapp.com';
 function preencherLinhasTabela(tbody, listaDados) {
     listaDados.forEach(dados => {
     const row = tbody.insertRow();
@@ -11,7 +13,7 @@ function preencherLinhasTabela(tbody, listaDados) {
   function getLeastEntregues(){
     const tabelaBody = document.getElementById("tabelaBody");
     tabelaBody.innerHTML = ''
-    axios.get('https://sistema-de-entregas-ciotta-25e16c0667db.herokuapp.com/entregas/entregue')
+    axios.get('${URL}/entregas/entregue')
     .then(response => {
       const dados = response.data;
       preencherLinhasTabela(tabelaBody, dados);

@@ -1,3 +1,6 @@
+const URL = 'https://sistema-de-entregas-ciotta-25e16c0667db.herokuapp.com';
+//const URL = 'http://localhost:3000';
+
 function resetCampos() {
   let allradiobuttons = document.querySelectorAll('.radio-group');
   allradiobuttons.forEach(value => value.checked = false);
@@ -5,7 +8,7 @@ function resetCampos() {
 
 function PreencherDashboardPrincipal(){
     const tabelaBody = document.getElementById("tabela-corpo");
-    axios.get('https://sistema-de-entregas-ciotta-25e16c0667db.herokuapp.com/entregas/info/0/Aguardando')
+    axios.get('${URL}/entregas/getoperador/operador/0/Aguardando')
     .then(response => {
       const dados = response.data;
       preencherLinhasTabela(tabelaBody, dados);
@@ -15,9 +18,9 @@ function PreencherDashboardPrincipal(){
       });
   }
 
-  function PreencherDashboardFord(){
+function PreencherDashboardFord(){
     const tabelaBody = document.getElementById("tabela1-corpo");
-    axios.get('https://sistema-de-entregas-ciotta-25e16c0667db.herokuapp.com/entregas/info1/2/Em%20andamento')
+    axios.get('${URL}/entregas/getoperador/operador2/2/Em%20andamento')
     .then(response => {
       const dados = response.data;
       preencherLinhasTabelaCaminhoes(tabelaBody, dados);
@@ -29,7 +32,7 @@ function PreencherDashboardPrincipal(){
 
 function PreencherDashboardVw(){
   const tabelaBody = document.getElementById("tabela2-corpo");
-  axios.get('https://sistema-de-entregas-ciotta-25e16c0667db.herokuapp.com/entregas/info1/1/Em%20andamento')
+  axios.get('${URL}/entregas/getoperador/operador2/1/Em%20andamento')
   .then(response => {
     const dados = response.data;
     preencherLinhasTabelaCaminhoes(tabelaBody, dados);
@@ -137,7 +140,7 @@ function updateEntregas1(tbody){
 
 function atualizaVeiculoEntrega(id_entrega, id_veiculo, situacao){
   // Enviar a requisição POST usando axios
-  axios.put(`https://sistema-de-entregas-ciotta-25e16c0667db.herokuapp.com/entregas/veiculo/${id_entrega}/${id_veiculo}/${situacao}`)
+  axios.put(`${URL}/entregas/veiculo/${id_entrega}/${id_veiculo}/${situacao}`)
   .then(response => {
     PreencherDashboardPrincipal();
     PreencherDashboardVw();

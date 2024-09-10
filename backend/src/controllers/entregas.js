@@ -1,7 +1,55 @@
 const Entrega = require('../models/entregas');
+/*async function excluirPrimeirosRegistros() {
+    try {
+        // Esperar pela conclusão da operação deleteMany
+        const resultado = await Entrega.deleteMany({ id_entrega: { $lt: 8000 } });
 
+        // Exibir o número de documentos excluídos
+        console.log(`Número de documentos excluídos: ${resultado.deletedCount}`);
+        return resultado;
+    } catch (error) {
+        // Exibir e lançar o erro para tratamento posterior
+        console.error('Erro ao excluir registros:', error);
+        throw error;
+    }
+}*/
 module.exports = {
-    async getAllEntregasFilterUser(req, res, next) {
+    async getAllEntregas(req, res, next) {
+        const { tipo } = req.params;
+
+        if (tipo == 'usuario'){
+            try {
+                const entregas = await Entrega.find({ situacao: { $in: ['Aguardando', 'Em andamento'] }}).sort({ situacao: 1 }).select('id_entrega nome_cliente bairro situacao vendedor observacao hora_entrega data_entrega -_id');
+                res.status(200).json(entregas);
+            } catch (error) {
+                console.error('Erro ao obter entregas', error);
+                next(error);
+            }
+        }
+
+        if (tipo =='operador'){
+            const { situacao, id_veiculo } = req.params;
+            try {
+                const entregas = await Entrega.find({ situacao, id_veiculo }).select('id_entrega nome_cliente bairro hora_entrega data_entrega observacao situacao -_id');
+                res.status(200).json(entregas);
+            } catch (error) {
+                console.error('Erro ao obter entregas', error);
+                next(error);
+            }
+        }
+
+        if (tipo =='operador2'){
+            const { situacao, id_veiculo } = req.params;
+            try {
+                const entregas = await Entrega.find({ situacao, id_veiculo }).select('id_entrega nome_cliente bairro hora_entrega data_entrega observacao situacao -_id');
+                res.status(200).json(entregas);
+            } catch (error) {
+                console.error('Erro ao obter entregas', error);
+                next(error);
+            }
+        }
+    },
+    /*async getAllEntregasFilterUser(req, res, next) {
         try {
             const entregas = await Entrega.find({ situacao: { $in: ['Aguardando', 'Em andamento'] }}).sort({ situacao: 1 }).select('id_entrega nome_cliente bairro situacao vendedor observacao hora_entrega data_entrega -_id');
             res.status(200).json(entregas);
@@ -31,7 +79,7 @@ module.exports = {
             console.error('Erro ao obter entregas', error);
             next(error);
         }
-    },
+    },*/
 
     async getLeastEntregues(req, res, next) {
         try {
@@ -63,10 +111,16 @@ module.exports = {
     async createEntrega(req, res) {
         const { id_entrega, id_veiculo, nome_cliente, bairro, situacao, data_entrega, hora_entrega, observacao, vendedor } = req.body;
         try {
-            const entrega = new Entrega ({ id_entrega, id_veiculo, nome_cliente, bairro, situacao, data_entrega, hora_entrega, observacao, vendedor });
-            await entrega.save();
-            /*const entrega = await Entrega.create({ id_entrega, id_veiculo, nome_cliente, bairro, situacao, data_entrega, hora_entrega, observacao, vendedor });*/
-            res.status(201).json(entrega);
+            const aux = Entrega.findOne({id_entrega:id_entrega});
+            if(aux){
+                res.status(500).json({error:'Entrega já cadastrada'})
+            }
+            else{
+                const entrega = new Entrega ({ id_entrega, id_veiculo, nome_cliente, bairro, situacao, data_entrega, hora_entrega, observacao, vendedor });
+                await entrega.save();
+                res.status(201).json(entrega);
+            }
+            
         } catch (error) {
             console.error(error);
             res.status(500).json({ error: 'Erro ao criar entrega.' });
@@ -113,18 +167,4 @@ module.exports = {
             res.status(500).json({ error: 'Erro ao atualizar Entrega.' });
         }
     },
-    async excluirPrimeirosRegistros() {
-        try {
-            // Encontrar os primeiros 40 registros
-            const registrosParaExcluir = await Entrega.find().limit(4);
-        
-            // Excluir os registros encontrados
-            await Entrega.deleteMany({ _id: { $in: registrosParaExcluir.map(registro => registro._id) } });
-        
-            console.log('Os primeiros 40 registros foram excluídos com sucesso.');
-          } catch (error) {
-            console.error('Erro ao excluir os primeiros 40 registros:', error);
-          }
-
-        } 
 };
