@@ -104,7 +104,7 @@ function getEntregasFilter(){
     preencherLinhasTabela(tabelaBody, dados);
   })
   .catch(error => {
-    alert('Erro na requisição:', error);
+    alert(`Erro na requisição: ${error}`);
     });
 }
 
@@ -122,7 +122,7 @@ function getEntregaByIdbtn(){
     }
   })
   .catch(error => {
-    alert('Erro na requisição:', error);
+    alert(`Erro na requisição: ${error}`);
     });
 }
 function preencherInput(dados){
@@ -195,7 +195,7 @@ function postEntregas(){
         alert("Entrega Enviada !")
       })
     .catch(error => {
-      alert('Erro ao enviar dados:', error);
+      alert(`Erro ao enviar dados: ${error}`);
     });
   }
 }
@@ -223,7 +223,7 @@ function atualizarEntrega(){
         getEntregasFilter();
       })
     .catch(error => {
-      alert('Erro ao enviar dados:', error);
+      alert(`Erro ao enviar dados: ${error}`);
        // Lógica adicional para lidar com erros, se necessário
     });
   }

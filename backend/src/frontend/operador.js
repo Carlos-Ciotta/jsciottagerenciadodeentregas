@@ -14,7 +14,7 @@ function PreencherDashboardPrincipal(){
       preencherLinhasTabela(tabelaBody, dados);
     })
     .catch(error => {
-      alert('Erro na requisição:', error);
+      alert(`Erro na requisição: ${error}`);
       });
   }
 
@@ -26,7 +26,7 @@ function PreencherDashboardFord(){
       preencherLinhasTabelaCaminhoes(tabelaBody, dados);
     })
     .catch(error => {
-      alert('Erro na requisição:', error);
+      alert(`Erro na requisição: ${error}`);
       });
 }
 
@@ -38,7 +38,7 @@ function PreencherDashboardVw(){
     preencherLinhasTabelaCaminhoes(tabelaBody, dados);
   })
   .catch(error => {
-    alert('Erro na requisição:', error);
+    alert(`Erro na requisição: ${error}`);
     });
 }
 
@@ -148,7 +148,6 @@ function atualizaVeiculoEntrega(id_entrega, id_veiculo, situacao){
     resetCampos();
     })
   .catch(error => {
-    console.error('Erro ao enviar dados:', error);
-     // Lógica adicional para lidar com erros, se necessário
+    alert(`Erro ao enviar dados: ${error}`);
   });
 }
