@@ -41,7 +41,7 @@ module.exports = {
         if (tipo =='operador2'){
             const { situacao, id_veiculo } = req.params;
             try {
-                const entregas = await Entrega.find({ situacao, id_veiculo }).select('id_entrega nome_cliente bairro hora_entrega data_entrega observacao situacao -_id');
+                const entregas = await Entrega.find({ situacao, id_veiculo }).select('id_entrega nome_cliente bairro -_id');
                 res.status(200).json(entregas);
             } catch (error) {
                 console.error('Erro ao obter entregas', error);
