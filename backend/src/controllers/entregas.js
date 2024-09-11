@@ -113,7 +113,8 @@ module.exports = {
         try {
             const aux = Entrega.findOne({id_entrega:id_entrega});
             if(aux){
-                res.status(500).json({error:'Entrega já cadastrada'})
+                const erro = new Error ("Entrega já cadastrada");
+                return next(erro);
             }
             else{
                 const entrega = new Entrega ({ id_entrega, id_veiculo, nome_cliente, bairro, situacao, data_entrega, hora_entrega, observacao, vendedor });
