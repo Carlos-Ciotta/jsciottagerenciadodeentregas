@@ -111,7 +111,7 @@ module.exports = {
     async createEntrega(req, res, next) {
         const { id_entrega, id_veiculo, nome_cliente, bairro, situacao, data_entrega, hora_entrega, observacao, vendedor } = req.body;
         try {
-            const aux = Entrega.findOne({id_entrega:id_entrega});
+            const aux = await Entrega.findOne({id_entrega:id_entrega});
             if(aux){
                 const erro = new Error ("Entrega já cadastrada");
                 return next(erro);
