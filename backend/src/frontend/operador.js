@@ -140,7 +140,7 @@ function updateEntregas1(tbody){
 
 function atualizaVeiculoEntrega(id_entrega, id_veiculo, situacao){
   // Enviar a requisição POST usando axios
-  axios.put(`${URL}/entregas/veiculo/${id_entrega}/${id_veiculo}/${situacao}`)
+  axios.put(`${URL}/entregas/veiculo/veiculo/${id_entrega}/${id_veiculo}/${situacao}`)
   .then(response => {
     PreencherDashboardPrincipal();
     PreencherDashboardVw();

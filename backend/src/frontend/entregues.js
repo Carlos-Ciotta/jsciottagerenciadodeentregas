@@ -13,7 +13,8 @@ function preencherLinhasTabela(tbody, listaDados) {
   function getLeastEntregues(){
     const tabelaBody = document.getElementById("tabelaBody");
     tabelaBody.innerHTML = ''
-    axios.get(`${URL}/entregas/entregue`)
+
+    axios.get(`${URL}/entregas/entregues/70`)
     .then(response => {
       const dados = response.data;
       preencherLinhasTabela(tabelaBody, dados);

@@ -30,6 +30,8 @@ function fecharPopup() {
   resetCampos_a();
   document.getElementById('popup').style.display = 'none';
   document.getElementById('overlay').style.display = 'none';
+  const id = document.getElementById('id_input_a');
+  id.disabled = false;
 }
 
 function ordenarOptions() {
@@ -121,7 +123,7 @@ function getEntregaByIdbtn(){
       alert("Não é possível alterar essa entrega. Entrega já está em andamento")
     }
   })
-  .catch(erro => {
+  .catch(error => {
     alert(`Erro na requisição: ${error.response.data.message}`);
     });
 }
@@ -215,17 +217,22 @@ function atualizarEntrega(){
   if(dadosEntrega.data_entrega.length == 0){
     alert("Preencha a Data")
   }else{
-    axios.put(`${URL}/entregas/${id_entrega}`, dadosEntrega)
+    axios.put(`${URL}/entregas/entrega/${id_entrega}`, dadosEntrega)
     .then(response => {
         alert("Entrega Alterada !")
         resetCampos_a();
         fecharPopup();
         getEntregasFilter();
+        const id = document.getElementById('id_input_a');
+        id.disabled = false;
       })
     .catch(error => {
       alert(`Erro ao enviar dados: ${error.response.data.message}`);
        // Lógica adicional para lidar com erros, se necessário
     });
   }
-  
+}
+
+function verificastatus(){
+  return alert("Indisponível")
 }
