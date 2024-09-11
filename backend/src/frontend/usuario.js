@@ -223,7 +223,7 @@ function atualizarEntrega(){
         getEntregasFilter();
       })
     .catch(error => {
-      console.error('Erro ao enviar dados:', error);
+      alert('Erro ao enviar dados:', error);
        // Lógica adicional para lidar com erros, se necessário
     });
   }
