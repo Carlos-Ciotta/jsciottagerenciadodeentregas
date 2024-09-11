@@ -98,7 +98,7 @@ function preencherLinhasTabela(tbody, listaDados) {
 function getEntregasFilter(){
   const tabelaBody = document.getElementById("tabelaBody");
   tabelaBody.innerHTML = ''
-  axios.get('${URL}/entregas/getusuario/usuario')
+  axios.get('https://sistema-de-entregas-ciotta-25e16c0667db.herokuapp.com/entregas/getusuario/usuario')
   .then(response => {
     const dados = response.data;
     preencherLinhasTabela(tabelaBody, dados);
@@ -111,7 +111,7 @@ function getEntregasFilter(){
 function getEntregaByIdbtn(){
   const id_entrega= document.getElementById("id_input_a").value;
   const id = document.getElementById('id_input_a');
-  axios.get(`${URL}/entregas/${id_entrega}`)
+  axios.get(`https://sistema-de-entregas-ciotta-25e16c0667db.herokuapp.com/entregas/${id_entrega}`)
   .then(response => {
     const dados = response.data;
     if(dados.situacao == "Aguardando"){
@@ -188,7 +188,7 @@ function postEntregas(){
       id_veiculo: 0
     };
     // Enviar a requisição POST usando axios
-    axios.post('${URL}/entregas', dadosEntrega)
+    axios.post('https://sistema-de-entregas-ciotta-25e16c0667db.herokuapp.com/entregas', dadosEntrega)
     .then(response => {
         getEntregasFilter();
         resetCampos();
@@ -215,7 +215,7 @@ function atualizarEntrega(){
   if(dadosEntrega.data_entrega.length == 0){
     alert("Preencha a Data")
   }else{
-    axios.put(`${URL}/entregas/${id_entrega}`, dadosEntrega)
+    axios.put(`https://sistema-de-entregas-ciotta-25e16c0667db.herokuapp.com/entregas/${id_entrega}`, dadosEntrega)
     .then(response => {
         alert("Entrega Alterada !")
         resetCampos_a();
