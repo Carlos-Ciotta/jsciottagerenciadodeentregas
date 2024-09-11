@@ -195,7 +195,7 @@ function postEntregas(){
         alert("Entrega Enviada !")
       })
     .catch(error => {
-      console.error('Erro ao enviar dados:', error);
+      alert('Erro ao enviar dados:', error);
     });
   }
 }
