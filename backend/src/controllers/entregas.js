@@ -108,7 +108,7 @@ module.exports = {
         }
     },
 
-    async createEntrega(req, res) {
+    async createEntrega(req, res, next) {
         const { id_entrega, id_veiculo, nome_cliente, bairro, situacao, data_entrega, hora_entrega, observacao, vendedor } = req.body;
         try {
             const aux = Entrega.findOne({id_entrega:id_entrega});

@@ -98,20 +98,20 @@ function preencherLinhasTabela(tbody, listaDados) {
 function getEntregasFilter(){
   const tabelaBody = document.getElementById("tabelaBody");
   tabelaBody.innerHTML = ''
-  axios.get('https://sistema-de-entregas-ciotta-25e16c0667db.herokuapp.com/entregas/getusuario/usuario')
+  axios.get(`${URL}/entregas/getusuario/usuario`)
   .then(response => {
     const dados = response.data;
     preencherLinhasTabela(tabelaBody, dados);
   })
   .catch(error => {
-    alert(`Erro na requisição: ${error}`);
+    alert(`Erro na requisição: ${error.response.data.message}`);
     });
 }
 
 function getEntregaByIdbtn(){
   const id_entrega= document.getElementById("id_input_a").value;
   const id = document.getElementById('id_input_a');
-  axios.get(`https://sistema-de-entregas-ciotta-25e16c0667db.herokuapp.com/entregas/${id_entrega}`)
+  axios.get(`${URL}/entregas/${id_entrega}`)
   .then(response => {
     const dados = response.data;
     if(dados.situacao == "Aguardando"){
@@ -122,7 +122,7 @@ function getEntregaByIdbtn(){
     }
   })
   .catch(erro => {
-    alert(`Erro na requisição: ${erro}`);
+    alert(`Erro na requisição: ${error.response.data.message}`);
     });
 }
 function preencherInput(dados){
@@ -188,14 +188,14 @@ function postEntregas(){
       id_veiculo: 0
     };
     // Enviar a requisição POST usando axios
-    axios.post('https://sistema-de-entregas-ciotta-25e16c0667db.herokuapp.com/entregas', dadosEntrega)
+    axios.post(`${URL}/entregas`, dadosEntrega)
     .then(response => {
         getEntregasFilter();
         resetCampos();
         alert("Entrega Enviada !")
       })
     .catch(error => {
-      alert(`Erro ao enviar dados: ${error}`);
+      alert(`Erro ao enviar dados: ${error.response.data.message}`);
     });
   }
 }
@@ -215,7 +215,7 @@ function atualizarEntrega(){
   if(dadosEntrega.data_entrega.length == 0){
     alert("Preencha a Data")
   }else{
-    axios.put(`https://sistema-de-entregas-ciotta-25e16c0667db.herokuapp.com/entregas/${id_entrega}`, dadosEntrega)
+    axios.put(`${URL}/entregas/${id_entrega}`, dadosEntrega)
     .then(response => {
         alert("Entrega Alterada !")
         resetCampos_a();
@@ -223,7 +223,7 @@ function atualizarEntrega(){
         getEntregasFilter();
       })
     .catch(error => {
-      alert(`Erro ao enviar dados: ${error}`);
+      alert(`Erro ao enviar dados: ${error.response.data.message}`);
        // Lógica adicional para lidar com erros, se necessário
     });
   }

@@ -9,6 +9,27 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div>
+        <button class="button" >Voltar</button><br><br>
+        <label for="radio_filtro">Filtro</label><br><br>
+        <div class="radio-group" id="radio_filtro">
+            <label>
+                <input type="radio" id="opcaoRadio" value="Pedido" name="opcaoRadio" class="radio-group"> Número de Pedido
+            </label>
+            <label>
+                <input type="radio" id="opcaoRadio" value="Cliente" name="opcaoRadio"class="radio-group"> Nome do Cliente
+            </label>
+            <label>
+                <input type="radio" id="opcaoRadio" value="Data_Entrega" name="opcaoRadio"class="radio-group"> Data de Entrega
+            </label>
+            <label>
+                <input type="radio" id="opcaoRadio" value="Vendedor" name="opcaoRadio"class="radio-group"> Vendedor
+            </label>
+            <br>
+            <input type="text" id="pesquisa" ><br><br>
+        
+        <button class="button" >Pesquisar</button><br><br>
+    </div>
     <div class="container">
         <table>
             <thead>
@@ -17,8 +38,10 @@
                     <th>Nome Cliente</th>
                     <th>Bairro</th>
                     <th>Situação</th>
-                    <th>Vendedor</th>
                     <th>Observação</th>
+                    <th>Vendedor</th>
+                    <th>Data da Entrega</th>
+                    
                 </tr>
             </thead>
             <tbody id="tabelaBody">

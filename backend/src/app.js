@@ -10,6 +10,17 @@ app.use(cors());
 
 app.use("/index", express.static(__dirname + '/frontend'));
 app.use('/', entregasRoutes); 
+app.use((err, req, res, next) => {
+    const statusCode = err.statusCode || 500;
+    const errorMessage = err.message || 'Erro interno do servidor';
+
+    res.status(statusCode).json({
+        message: errorMessage,
+    });
+});
+
+
+
 //const PORT = 3000;
 mongoose.connect('mongodb+srv://carloseduardociotta:mongodb159753@ciotta.am99pad.mongodb.net/?retryWrites=true&w=majority')
 app.listen(process.env.PORT/*PORT*/, () => {
