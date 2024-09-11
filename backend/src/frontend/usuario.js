@@ -121,8 +121,8 @@ function getEntregaByIdbtn(){
       alert("Não é possível alterar essa entrega. Entrega já está em andamento")
     }
   })
-  .catch(error => {
-    alert(`Erro na requisição: ${error}`);
+  .catch(erro => {
+    alert(`Erro na requisição: ${erro}`);
     });
 }
 function preencherInput(dados){
