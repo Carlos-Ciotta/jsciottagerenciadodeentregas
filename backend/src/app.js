@@ -20,8 +20,8 @@ app.use((err, req, res, next) => {
 });
 
 
-
+mongoose.connect('mongodb+srv://carloseduardociotta:mongodb159753@ciotta.am99pad.mongodb.net/?retryWrites=true&w=majority&appName=ciotta')
 //const PORT = 3000;
-mongoose.connect('mongodb+srv://carloseduardociotta:mongodb159753@ciotta.am99pad.mongodb.net/?retryWrites=true&w=majority')
+//mongoose.connect('mongodb+srv://carloseduardociotta:mongodb159753@ciotta.am99pad.mongodb.net/?retryWrites=true&w=majority')
 app.listen(process.env.PORT/*PORT*/, () => {
 console.log(`Servidor rodando`);});
